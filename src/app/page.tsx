@@ -820,7 +820,7 @@ Phone: ${selectedCompanyData.phone}
       <div className="fixed bottom-0 left-0 right-0 bg-green-600 p-4 z-50">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <span className="text-white font-semibold">Support JobFind via M-Pesa:</span>
+            <span className="text-white font-semibold">Support JobFind Kenya via M-Pesa:</span>
             <span className="text-white font-bold text-xl">KSh 1,000</span>
             <span className="text-white/80">to</span>
             <span className="text-white font-bold">+254 726 038 754</span>
@@ -830,6 +830,19 @@ Phone: ${selectedCompanyData.phone}
           </button>
         </div>
       </div>
+
+      <button 
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setActiveTab("jobs");
+        }}
+        className="fixed top-24 right-4 z-50 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition"
+        title="Back to Top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+        </svg>
+      </button>
 
       <div className="fixed bottom-20 left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
         <div className="max-w-6xl mx-auto flex items-center gap-6">
