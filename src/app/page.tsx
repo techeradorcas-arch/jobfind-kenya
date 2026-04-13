@@ -35,10 +35,15 @@ const companyAds = [
 
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvwriter" | "advertise">("jobs");
+  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "advertise">("jobs");
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
+  const [cvBuilderData, setCvBuilderData] = useState({
+    fullName: "", email: "", phone: "", address: "", linkedin: "", portfolio: "",
+    objective: "", skills: "", workHistory: "", education: "", certifications: "", languages: "", refs: ""
+  });
+  const [selectedTemplate, setSelectedTemplate] = useState("modern");
   const [cvWriterData, setCvWriterData] = useState({
     fullName: "", email: "", phone: "", address: "", jobTitle: "", summary: "", skills: "", experience: "", education: "", languages: "", refs: ""
   });
@@ -163,38 +168,81 @@ Date: ${new Date().toLocaleDateString()}
     URL.revokeObjectURL(url);
   };
 
-  const shareToCompany = (companyName: string, companyPhone: string) => {
+  const saveCVBuilder = () => {
+    const cvContent = `
+${cvBuilderData.fullName.toUpperCase()}
+${cvBuilderData.email} | ${cvBuilderData.phone}
+${cvBuilderData.address}
+${cvBuilderData.linkedin ? `LinkedIn: ${cvBuilderData.linkedin}` : ""}
+${cvBuilderData.portfolio ? `Portfolio: ${cvBuilderData.portfolio}` : ""}
+
+OBJECTIVE
+${cvBuilderData.objective}
+
+SKILLS
+${cvBuilderData.skills}
+
+WORK EXPERIENCE
+${cvBuilderData.workHistory}
+
+EDUCATION
+${cvBuilderData.education}
+
+${cvBuilderData.certifications ? `CERTIFICATIONS\n${cvBuilderData.certifications}` : ""}
+
+${cvBuilderData.languages ? `LANGUAGES\n${cvBuilderData.languages}` : ""}
+
+${cvBuilderData.refs ? `REFERENCES\n${cvBuilderData.refs}` : ""}
+
+---
+Created with JobFind CV Builder
+Date: ${new Date().toLocaleDateString()}
+    `.trim();
+    
+    const blob = new Blob([cvContent], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${cvBuilderData.fullName.replace(/\s+/g, "_") || "CV"}_Builder.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const shareCVBuilderToCompany = (companyName: string, companyPhone: string) => {
     const cvContent = `APPLICATION FOR ${companyName.toUpperCase()}
 
 PERSONAL DETAILS
-Name: ${cvWriterData.fullName}
-Email: ${cvWriterData.email}
-Phone: ${cvWriterData.phone}
-Address: ${cvWriterData.address}
+Name: ${cvBuilderData.fullName}
+Email: ${cvBuilderData.email}
+Phone: ${cvBuilderData.phone}
+Address: ${cvBuilderData.address}
+LinkedIn: ${cvBuilderData.linkedin}
+Portfolio: ${cvBuilderData.portfolio}
 
-JOB TITLE
-${cvWriterData.jobTitle}
+OBJECTIVE
+${cvBuilderData.objective}
 
-PROFESSIONAL SUMMARY
-${cvWriterData.summary}
-
-KEY SKILLS
-${cvWriterData.skills}
+SKILLS
+${cvBuilderData.skills}
 
 WORK EXPERIENCE
-${cvWriterData.experience}
+${cvBuilderData.workHistory}
 
 EDUCATION
-${cvWriterData.education}
+${cvBuilderData.education}
+
+CERTIFICATIONS
+${cvBuilderData.certifications}
 
 LANGUAGES
-${cvWriterData.languages}
+${cvBuilderData.languages}
 
 REFERENCES
-${cvWriterData.refs}
+${cvBuilderData.refs}
 
 ---
-Application submitted via JobFind
+Apply via JobFind CV Builder
+Company Contact: ${companyPhone}
 Date: ${new Date().toLocaleDateString()}
     `.trim();
     
@@ -205,7 +253,7 @@ Date: ${new Date().toLocaleDateString()}
     a.download = `Application_${companyName.replace(/\s+/g, "_")}.txt`;
     a.click();
     URL.revokeObjectURL(url);
-    alert(`CV shared! Application file for ${companyName} has been downloaded. Send to: ${companyPhone}`);
+    alert(`Application submitted to ${companyName}!\nContact: ${companyPhone}`);
   };
 
   const selectedCompanyData = companies.find(c => c.id === selectedCompany);
@@ -219,6 +267,7 @@ Date: ${new Date().toLocaleDateString()}
             <nav className="hidden md:flex gap-6">
               <button onClick={() => setActiveTab("jobs")} className={`${activeTab === "jobs" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Jobs</button>
               <button onClick={() => setActiveTab("companies")} className={`${activeTab === "companies" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Companies</button>
+              <button onClick={() => setActiveTab("cvbuilder")} className={`${activeTab === "cvbuilder" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>CV Builder</button>
               <button onClick={() => setActiveTab("cv")} className={`${activeTab === "cv" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Export CV</button>
               <button onClick={() => setActiveTab("cvwriter")} className={`${activeTab === "cvwriter" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>CV Writer AI</button>
               <button onClick={() => setActiveTab("advertise")} className={`${activeTab === "advertise" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Advertise</button>
@@ -329,6 +378,116 @@ Date: ${new Date().toLocaleDateString()}
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "cvbuilder" && (
+        <section className="py-12 px-4">
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-2 text-center">CV Builder</h3>
+            <p className="text-neutral-400 mb-8 text-center">Build a professional CV with multiple templates</p>
+            
+            <div className="flex gap-4 mb-6 justify-center">
+              {["modern", "classic", "creative"].map((template) => (
+                <button
+                  key={template}
+                  onClick={() => setSelectedTemplate(template)}
+                  className={`px-4 py-2 rounded-lg font-semibold capitalize ${selectedTemplate === template ? "bg-blue-600 text-white" : "bg-neutral-700 text-neutral-300 hover:bg-neutral-600"}`}
+                >
+                  {template}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-neutral-800 rounded-lg p-6 space-y-4">
+                <h4 className="text-white font-semibold text-lg">Personal Information</h4>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Full Name</label>
+                  <input type="text" placeholder="John Doe" value={cvBuilderData.fullName} onChange={(e) => setCvBuilderData({...cvBuilderData, fullName: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-neutral-400 text-sm mb-1 block">Email</label>
+                    <input type="email" placeholder="john@email.com" value={cvBuilderData.email} onChange={(e) => setCvBuilderData({...cvBuilderData, email: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                  </div>
+                  <div>
+                    <label className="text-neutral-400 text-sm mb-1 block">Phone</label>
+                    <input type="tel" placeholder="+254 700 000000" value={cvBuilderData.phone} onChange={(e) => setCvBuilderData({...cvBuilderData, phone: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Address</label>
+                  <input type="text" placeholder="Nairobi, Kenya" value={cvBuilderData.address} onChange={(e) => setCvBuilderData({...cvBuilderData, address: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-neutral-400 text-sm mb-1 block">LinkedIn</label>
+                    <input type="text" placeholder="linkedin.com/in/johndoe" value={cvBuilderData.linkedin} onChange={(e) => setCvBuilderData({...cvBuilderData, linkedin: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                  </div>
+                  <div>
+                    <label className="text-neutral-400 text-sm mb-1 block">Portfolio</label>
+                    <input type="text" placeholder="johndoe.com" value={cvBuilderData.portfolio} onChange={(e) => setCvBuilderData({...cvBuilderData, portfolio: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Career Objective</label>
+                  <textarea placeholder="A dedicated professional seeking..." rows={2} value={cvBuilderData.objective} onChange={(e) => setCvBuilderData({...cvBuilderData, objective: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Skills (comma separated)</label>
+                  <textarea placeholder="JavaScript, React, Node.js, Python..." rows={2} value={cvBuilderData.skills} onChange={(e) => setCvBuilderData({...cvBuilderData, skills: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Work Experience</label>
+                  <textarea placeholder="Company Name - Role - Duration&#10;Company Name - Role - Duration" rows={4} value={cvBuilderData.workHistory} onChange={(e) => setCvBuilderData({...cvBuilderData, workHistory: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Education</label>
+                  <textarea placeholder="University - Degree - Year" rows={3} value={cvBuilderData.education} onChange={(e) => setCvBuilderData({...cvBuilderData, education: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Certifications</label>
+                  <textarea placeholder="AWS Certified, Google Analytics..." rows={2} value={cvBuilderData.certifications} onChange={(e) => setCvBuilderData({...cvBuilderData, certifications: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">Languages</label>
+                  <input type="text" placeholder="English, Swahili" value={cvBuilderData.languages} onChange={(e) => setCvBuilderData({...cvBuilderData, languages: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="text-neutral-400 text-sm mb-1 block">References</label>
+                  <textarea placeholder="Reference name - Position - Contact" rows={2} value={cvBuilderData.refs} onChange={(e) => setCvBuilderData({...cvBuilderData, refs: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="bg-green-600 rounded-lg p-6">
+                  <h4 className="text-white font-semibold text-lg mb-4">Save Your CV</h4>
+                  <button onClick={saveCVBuilder} className="w-full bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition mb-3">
+                    Download CV
+                  </button>
+                  <p className="text-white/80 text-sm">Download your CV as a file</p>
+                </div>
+
+                <div className="bg-neutral-800 rounded-lg p-6">
+                  <h4 className="text-white font-semibold text-lg mb-4">Apply to Companies</h4>
+                  <p className="text-neutral-400 text-sm mb-4">Submit your CV directly to companies</p>
+                  <div className="space-y-3">
+                    {companies.map((company) => (
+                      <button 
+                        key={company.id}
+                        onClick={() => shareCVBuilderToCompany(company.name, company.phone)}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-semibold transition flex items-center justify-between"
+                      >
+                        <span>{company.name}</span>
+                        <span className="text-xs opacity-80">Apply</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -478,7 +637,7 @@ Date: ${new Date().toLocaleDateString()}
                     {companies.map((company) => (
                       <button 
                         key={company.id}
-                        onClick={() => shareToCompany(company.name, company.phone)}
+                        onClick={() => shareCVBuilderToCompany(company.name, company.phone)}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-semibold transition flex items-center justify-between"
                       >
                         <span>{company.name}</span>
