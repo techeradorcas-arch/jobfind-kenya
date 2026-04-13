@@ -367,6 +367,31 @@ Date: ${new Date().toLocaleDateString()}
 
           <section className="py-8 px-4">
             <div className="max-w-6xl mx-auto">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="text-yellow-500 text-lg font-bold">🎓 Scholarships Available</h4>
+                <button onClick={() => setActiveTab("scholarships")} className="text-blue-400 hover:text-blue-300 text-sm">View All →</button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {scholarships.slice(0, 6).map((scholarship) => (
+                  <div key={scholarship.id} className="bg-neutral-800 rounded-lg p-4 hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-yellow-500">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-yellow-400 text-xs font-semibold">{scholarship.provider}</span>
+                      <span className="text-neutral-500 text-xs">{scholarship.deadline}</span>
+                    </div>
+                    <h5 className="text-white font-semibold mb-1">{scholarship.name}</h5>
+                    <p className="text-neutral-400 text-sm mb-2">{scholarship.location}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-green-400 font-bold text-sm">{scholarship.amount}</span>
+                      <span className="text-blue-400 text-xs">{scholarship.level}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-8 px-4">
+            <div className="max-w-6xl mx-auto">
               <h4 className="text-neutral-500 text-sm mb-4">Sponsored</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {companyAds.slice(0, 2).map((ad) => (
