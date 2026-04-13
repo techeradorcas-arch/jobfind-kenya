@@ -1,14 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
 const companies = [
-  { id: 1, name: "Safaricom", logo: "S", color: "bg-red-600", jobs: 45, phone: "+254 722 000000" },
-  { id: 2, name: "Kenya Airways", logo: "KA", color: "bg-yellow-600", jobs: 28, phone: "+254 20 827000" },
-  { id: 3, name: "Kenyatta University", logo: "KU", color: "bg-blue-600", jobs: 15, phone: "+254 20 871000" },
-  { id: 4, name: "Equity Bank", logo: "EB", color: "bg-green-600", jobs: 32, phone: "+254 763 100000" },
-  { id: 5, name: "Kenya Power", logo: "KP", color: "bg-yellow-700", jobs: 18, phone: "+254 20 3201000" },
-  { id: 6, name: "Jumia Kenya", logo: "J", color: "bg-orange-600", jobs: 22, phone: "+254 20 6807000" },
-  { id: 7, name: "TechCorp Africa", logo: "TC", color: "bg-purple-600", jobs: 12, phone: "+254 20 3752000" },
-  { id: 8, name: "Nestle Kenya", logo: "N", color: "bg-blue-700", jobs: 8, phone: "+254 20 3221000" },
+  { id: 1, name: "Safaricom", logo: "S", color: "bg-red-600", jobs: 45, phone: "+254 722 000000", requirements: "Degree in IT/Computer Science, 3+ years experience, Strong analytical skills, Communication skills" },
+  { id: 2, name: "Kenya Airways", logo: "KA", color: "bg-yellow-600", jobs: 28, phone: "+254 20 827000", requirements: "Degree in Business/Aviation, Customer service experience, Leadership skills, Problem-solving abilities" },
+  { id: 3, name: "Kenyatta University", logo: "KU", color: "bg-blue-600", jobs: 15, phone: "+254 20 871000", requirements: "PhD/MSc in relevant field, Teaching experience, Research publications, Academic qualifications" },
+  { id: 4, name: "Equity Bank", logo: "EB", color: "bg-green-600", jobs: 32, phone: "+254 763 100000", requirements: "Degree in Finance/Banking, CRM experience, Sales skills, Customer relations" },
+  { id: 5, name: "Kenya Power", logo: "KP", color: "bg-yellow-700", jobs: 18, phone: "+254 20 3201000", requirements: "Degree in Electrical Engineering, Technical certification, Problem-solving skills, Safety awareness" },
+  { id: 6, name: "Jumia Kenya", logo: "J", color: "bg-orange-600", jobs: 22, phone: "+254 20 6807000", requirements: "Degree in Marketing/Business, Digital marketing skills, E-commerce knowledge, Communication skills" },
+  { id: 7, name: "TechCorp Africa", logo: "TC", color: "bg-purple-600", jobs: 12, phone: "+254 20 3752000", requirements: "Degree in Computer Science, Full-stack development skills, Cloud knowledge, Teamwork" },
+  { id: 8, name: "Nestle Kenya", logo: "N", color: "bg-blue-700", jobs: 8, phone: "+254 20 3221000", requirements: "Degree in Sales/Marketing, FMCG experience, Negotiation skills, Driving license" },
 ];
 
 const jobs = [
@@ -120,6 +122,8 @@ const adBanners = [
 ];
 
 export default function Home() {
+  const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
+
   return (
     <main className="min-h-screen bg-neutral-900">
       <header className="sticky top-0 z-50 bg-neutral-900/95 backdrop-blur border-b border-neutral-800">
@@ -130,7 +134,7 @@ export default function Home() {
             </h1>
             <nav className="hidden md:flex gap-6">
               <a href="#jobs" className="text-neutral-300 hover:text-white transition">Jobs</a>
-              <a href="#companies" className="text-neutral-300 hover:text-white transition">Companies</a>
+              <button onClick={() => document.getElementById('companies')?.scrollIntoView({ behavior: 'smooth' })} className="text-neutral-300 hover:text-white transition">Companies</button>
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
                 Post a Job
               </button>
@@ -181,9 +185,10 @@ export default function Home() {
           <h3 className="text-2xl font-bold text-white mb-8">Top Hiring Companies in Kenya</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {companies.map((company) => (
-              <div
+              <button
                 key={company.id}
-                className="bg-neutral-800 rounded-lg p-6 text-center hover:bg-neutral-750 transition cursor-pointer"
+                onClick={() => setSelectedCompany(company.id)}
+                className="bg-neutral-800 rounded-lg p-6 text-center hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-blue-500"
               >
                 <div
                   className={`w-14 h-14 ${company.color} rounded-lg flex items-center justify-center text-white font-bold text-xl mx-auto mb-3`}
@@ -193,11 +198,44 @@ export default function Home() {
                 <h4 className="text-white font-semibold">{company.name}</h4>
                 <p className="text-neutral-400 text-sm">{company.jobs} open positions</p>
                 <p className="text-blue-400 text-sm mt-1">{company.phone}</p>
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
+
+      {selectedCompany && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/70" onClick={() => setSelectedCompany(null)} />
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full">
+            {(() => {
+              const company = companies.find(c => c.id === selectedCompany);
+              return (
+                <>
+                  <button
+                    onClick={() => setSelectedCompany(null)}
+                    className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl"
+                  >
+                    ✕
+                  </button>
+                  <div className={`w-16 h-16 ${company?.color} rounded-lg flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4`}>
+                    {company?.logo}
+                  </div>
+                  <h3 className="text-2xl font-bold text-white text-center mb-2">{company?.name}</h3>
+                  <p className="text-blue-400 text-center mb-4">{company?.phone}</p>
+                  <div className="bg-neutral-700 rounded-lg p-4">
+                    <h4 className="text-white font-semibold mb-3">Requirements</h4>
+                    <p className="text-neutral-300 text-sm">{company?.requirements}</p>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <p className="text-neutral-400 text-sm">{company?.jobs} open positions</p>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
 
       <section className="py-8 px-4">
         <div className="max-w-6xl mx-auto">
