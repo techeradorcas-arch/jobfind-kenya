@@ -887,45 +887,21 @@ Phone: ${selectedCompanyData.phone}
               <p className="text-neutral-500 text-xs text-center">Download your CV with application to {selectedCompanyData.name}</p>
             </div>
           </div>
-        </div>
+      </div>
       )}
 
-      <footer className="bg-neutral-800 py-12 px-4 mt-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">🇰🇪</span>
-                <h1 className="text-2xl font-bold text-white"><span className="text-blue-500">Job</span>Find Kenya</h1>
-              </div>
-              <p className="text-neutral-400 mt-2">Official Government Verified Employment Portal</p>
-              <p className="text-green-500 text-sm mt-1">Licensed by Ministry of Labour • Reg. No. MLSP/2024/001</p>
-            </div>
-            <div className="flex gap-6">
-              <a href="#" className="text-neutral-400 hover:text-white transition">About</a>
-              <a href="#" className="text-neutral-400 hover:text-white transition">Privacy</a>
-              <a href="#" className="text-neutral-400 hover:text-white transition">Terms</a>
-              <a href="#" className="text-neutral-400 hover:text-white transition">Contact</a>
-            </div>
+      <div className="fixed bottom-[220px] left-0 right-0 bg-yellow-600 border-t border-yellow-500 p-3 z-40 overflow-x-auto">
+        <div className="max-w-6xl mx-auto flex items-center gap-6">
+          <span className="text-white text-sm font-semibold whitespace-nowrap">🎓 Scholarships:</span>
+          <div className="flex items-center gap-4 overflow-x-auto">
+            {scholarships.slice(0, 6).map((scholarship) => (
+              <button key={scholarship.id} onClick={() => setActiveTab("scholarships")} className="flex items-center gap-2 bg-white/20 rounded-full px-3 py-1 cursor-pointer hover:bg-white/30 transition whitespace-nowrap">
+                <span className="text-white text-xs">{scholarship.name}</span>
+              </button>
+            ))}
           </div>
-          <div className="border-t border-neutral-700 mt-8 pt-8 text-center text-neutral-500">© 2026 JobFind Kenya - Government Verified Portal. All rights reserved.</div>
-        </div>
-      </footer>
-
-      <div className="fixed bottom-0 left-0 right-0 bg-green-600 p-4 z-50">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <span className="text-white font-semibold">Support JobFind Kenya via M-Pesa:</span>
-            <span className="text-white font-bold text-xl">KSh 1,000</span>
-            <span className="text-white/80">to</span>
-            <span className="text-white font-bold">+254 726 038 754</span>
-          </div>
-          <button onClick={() => setActiveTab("advertise")} className="bg-white text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
-            Advertise With Us
-          </button>
         </div>
       </div>
-      
 
       <div className="fixed bottom-20 left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
         <div className="max-w-6xl mx-auto flex items-center gap-6">
