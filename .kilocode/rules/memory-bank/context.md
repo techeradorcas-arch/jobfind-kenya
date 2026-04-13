@@ -1,87 +1,58 @@
-# Active Context: Next.js Starter Template
+# Active Context: Job Board Application
 
 ## Current State
 
-**Template Status**: ✅ Ready for development
+**Application Status**: ✅ Functional job finding platform
 
-The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. It's ready for AI-assisted expansion to build any type of application.
+A job board application with multiple company listings, job opportunities, and ad placement zones for monetization.
 
 ## Recently Completed
 
-- [x] Base Next.js 16 setup with App Router
-- [x] TypeScript configuration with strict mode
-- [x] Tailwind CSS 4 integration
-- [x] ESLint configuration
-- [x] Memory bank documentation
-- [x] Recipe system for common features
+- [x] Converted template to JobFind job board app
+- [x] Added hero section with search functionality
+- [x] Created company showcase section (6 companies)
+- [x] Added job listings (8 jobs with details)
+- [x] Integrated 3 ad placement zones (728x90, 970x250 banners)
+- [x] Created responsive navigation with sticky header
+- [x] Built footer with links
 
 ## Current Structure
 
 | File/Directory | Purpose | Status |
 |----------------|---------|--------|
-| `src/app/page.tsx` | Home page | ✅ Ready |
-| `src/app/layout.tsx` | Root layout | ✅ Ready |
-| `src/app/globals.css` | Global styles | ✅ Ready |
-| `.kilocode/` | AI context & recipes | ✅ Ready |
+| `src/app/page.tsx` | Job board main page | ✅ Complete |
+| `src/app/layout.tsx` | Root layout with metadata | ✅ Complete |
+| `src/app/globals.css` | Global styles (Tailwind) | ✅ Ready |
 
-## Current Focus
+## Key Features
 
-The template is ready. Next steps depend on user requirements:
+- Search for jobs by title/keyword and location
+- Company showcase with 6 top companies
+- 8 detailed job listings with salary, tags, location
+- 3 ad banner zones for monetization:
+  - Top banner: 728x90
+  - Middle banner: 970x250
+  - Bottom banner: 728x90
+- Sticky navigation header
+- Responsive design
 
-1. What type of application to build
-2. What features are needed
-3. Design/branding preferences
+## Ad Integration
 
-## Quick Start Guide
-
-### To add a new page:
-
-Create a file at `src/app/[route]/page.tsx`:
-```tsx
-export default function NewPage() {
-  return <div>New page content</div>;
-}
-```
-
-### To add components:
-
-Create `src/components/` directory and add components:
-```tsx
-// src/components/ui/Button.tsx
-export function Button({ children }: { children: React.ReactNode }) {
-  return <button className="px-4 py-2 bg-blue-600 text-white rounded">{children}</button>;
-}
-```
-
-### To add a database:
-
-Follow `.kilocode/recipes/add-database.md`
-
-### To add API routes:
-
-Create `src/app/api/[route]/route.ts`:
-```tsx
-import { NextResponse } from "next/server";
-
-export async function GET() {
-  return NextResponse.json({ message: "Hello" });
-}
-```
-
-## Available Recipes
-
-| Recipe | File | Use Case |
-|--------|------|----------|
-| Add Database | `.kilocode/recipes/add-database.md` | Data persistence with Drizzle + SQLite |
-
-## Pending Improvements
-
-- [ ] Add more recipes (auth, email, etc.)
-- [ ] Add example components
-- [ ] Add testing setup recipe
+To monetize, replace ad placeholder divs with actual ad code:
+- Google AdSense script integration in layout.tsx
+- Ad slot IDs in the ad banner zones
+- Banner sizes: 728x90, 970x250
 
 ## Session History
 
 | Date | Changes |
 |------|---------|
-| Initial | Template created with base setup |
+| 2026-04-13 | Converted to JobFind job board with ads |
+
+## Pending Improvements
+
+- [ ] Add job detail pages
+- [ ] Add filter by job type/salary
+- [ ] Add apply button functionality
+- [ ] Add actual ad script integration
+- [ ] Add more job listings

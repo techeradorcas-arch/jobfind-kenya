@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Template",
-  description: "A minimal Next.js starter template",
+  title: "JobFind - Find Your Dream Job",
+  description: "Discover job opportunities from top companies. Find your next career move today.",
 };
 
 export default function RootLayout({
