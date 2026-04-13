@@ -35,10 +35,11 @@ const companyAds = [
 
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv">("jobs");
+  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "advertise">("jobs");
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
+  const [adData, setAdData] = useState({ companyName: "", contactPerson: "", email: "", phone: "", message: "" });
 
   const handleExportCV = () => {
     const cvContent = `${cvData.firstName} ${cvData.lastName}
@@ -77,6 +78,7 @@ ${cvData.education}`.trim();
               <button onClick={() => setActiveTab("jobs")} className={`${activeTab === "jobs" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Jobs</button>
               <button onClick={() => setActiveTab("companies")} className={`${activeTab === "companies" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Companies</button>
               <button onClick={() => setActiveTab("cv")} className={`${activeTab === "cv" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Export CV</button>
+              <button onClick={() => setActiveTab("advertise")} className={`${activeTab === "advertise" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Advertise</button>
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Post a Job</button>
             </nav>
           </div>
@@ -234,6 +236,49 @@ ${cvData.education}`.trim();
                 <textarea placeholder="University Name - Degree - Year" rows={3} value={cvData.education} onChange={(e) => setCvData({...cvData, education: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
               </div>
               <button onClick={handleExportCV} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">Download CV</button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "advertise" && (
+        <section className="py-12 px-4">
+          <div className="max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-2 text-center">Advertise With Us</h3>
+            <p className="text-neutral-400 mb-8 text-center">Reach thousands of job seekers in Kenya. Promote your company!</p>
+            
+            <div className="bg-neutral-800 rounded-lg p-6 space-y-4 mb-8">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-white text-sm mb-1 block">Company Name</label>
+                  <input type="text" placeholder="Your Company" value={adData.companyName} onChange={(e) => setAdData({...adData, companyName: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="text-white text-sm mb-1 block">Contact Person</label>
+                  <input type="text" placeholder="John Doe" value={adData.contactPerson} onChange={(e) => setAdData({...adData, contactPerson: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+                </div>
+              </div>
+              <div>
+                <label className="text-white text-sm mb-1 block">Email</label>
+                <input type="email" placeholder="company@email.com" value={adData.email} onChange={(e) => setAdData({...adData, email: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+              </div>
+              <div>
+                <label className="text-white text-sm mb-1 block">Phone</label>
+                <input type="tel" placeholder="+254 700 000000" value={adData.phone} onChange={(e) => setAdData({...adData, phone: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+              </div>
+              <div>
+                <label className="text-white text-sm mb-1 block">Message</label>
+                <textarea placeholder="Tell us about your advertising needs..." rows={4} value={adData.message} onChange={(e) => setAdData({...adData, message: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+              </div>
+              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">Submit Inquiry</button>
+            </div>
+
+            <div className="bg-green-600 rounded-lg p-6 text-center">
+              <h4 className="text-white text-xl font-bold mb-2">Support JobFind!</h4>
+              <p className="text-white/80 mb-4">Help us keep this service free for job seekers</p>
+              <p className="text-white font-semibold mb-2">Donate via M-Pesa</p>
+              <p className="text-white text-2xl font-bold">KSh 1000</p>
+              <p className="text-white/80 text-sm mt-2">Send to: +254 726 038 754</p>
             </div>
           </div>
         </section>
