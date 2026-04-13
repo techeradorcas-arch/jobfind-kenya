@@ -883,7 +883,10 @@ Phone: ${selectedCompanyData.phone}
 
       <div className="fixed bottom-20 left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
         <div className="max-w-6xl mx-auto flex items-center gap-6">
-          <span className="text-neutral-400 text-sm whitespace-nowrap">CV Tools:</span>
+          <span className="text-neutral-400 text-sm whitespace-nowrap">Quick Access:</span>
+          <button onClick={() => setActiveTab("news")} className="flex items-center gap-2 bg-green-600 rounded-full px-4 py-2 cursor-pointer hover:bg-green-700 transition">
+            <span className="text-white text-sm whitespace-nowrap">News</span>
+          </button>
           <div className="flex items-center gap-4">
             <button onClick={() => setActiveTab("cvbuilder")} className="flex items-center gap-2 bg-blue-600 rounded-full px-4 py-2 cursor-pointer hover:bg-blue-700 transition">
               <span className="text-white text-sm whitespace-nowrap">CV Builder</span>
