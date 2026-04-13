@@ -287,7 +287,7 @@ ${cvData.education}`.trim();
       {selectedCompany && selectedCompanyData && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70" onClick={() => setSelectedCompany(null)} />
-          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full">
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <button onClick={() => setSelectedCompany(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
             <div className="h-40 overflow-hidden rounded-lg mb-4">
               <img src={selectedCompanyData.image} alt={selectedCompanyData.name} className="w-full h-full object-cover" />
@@ -304,7 +304,13 @@ ${cvData.education}`.trim();
               <h4 className="text-white font-semibold mb-3">Requirements</h4>
               <p className="text-neutral-300 text-sm">{selectedCompanyData.requirements}</p>
             </div>
-            <p className="text-neutral-400 text-sm text-center">{selectedCompanyData.jobs} open positions</p>
+            <p className="text-neutral-400 text-sm text-center mb-4">{selectedCompanyData.jobs} open positions</p>
+            <div className="space-y-3">
+              <p className="text-white font-semibold text-center">Apply with your CV</p>
+              <button onClick={() => { setSelectedCompany(null); setActiveTab("cv"); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                Export CV & Apply
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -346,10 +352,10 @@ ${cvData.education}`.trim();
           <span className="text-neutral-400 text-sm whitespace-nowrap">Our Partners:</span>
           <div className="flex items-center gap-4">
             {companies.map((company) => (
-              <div key={company.id} className="flex items-center gap-2 bg-neutral-700 rounded-full px-3 py-1 cursor-pointer hover:bg-neutral-600 transition">
+              <button key={company.id} onClick={() => setSelectedCompany(company.id)} className="flex items-center gap-2 bg-neutral-700 rounded-full px-3 py-1 cursor-pointer hover:bg-neutral-600 transition">
                 <img src={company.image} alt={company.name} className="w-6 h-6 rounded-full object-cover" />
                 <span className="text-white text-sm whitespace-nowrap">{company.name}</span>
-              </div>
+              </button>
             ))}
           </div>
         </div>
