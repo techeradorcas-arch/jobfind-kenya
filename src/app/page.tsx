@@ -76,6 +76,7 @@ export default function Home() {
   const [adData, setAdData] = useState({ companyName: "", contactPerson: "", email: "", phone: "", message: "" });
 
   const handleExportCV = () => {
+    alert("CV download: KSh 10\n\nDownload your professional CV for just KSh 10 via M-Pesa to +254 726 038 754");
     const cvContent = `${cvData.firstName} ${cvData.lastName}
 Email: ${cvData.email} | Phone: ${cvData.phone}
 Job Title: ${cvData.jobTitle}
@@ -149,6 +150,7 @@ Date: ${new Date().toLocaleDateString()}
   };
 
   const saveCV = () => {
+    alert("CV download: KSh 10\n\nDownload your professional CV for just KSh 10 via M-Pesa to +254 726 038 754");
     const cvContent = `CV - ${cvWriterData.fullName || "My CV"}
 
 PERSONAL DETAILS
@@ -193,6 +195,7 @@ Date: ${new Date().toLocaleDateString()}
   };
 
   const saveCVBuilder = () => {
+    alert("CV download: KSh 10\n\nDownload your professional CV for just KSh 10 via M-Pesa to +254 726 038 754");
     const cvContent = `
 ${cvBuilderData.fullName.toUpperCase()}
 ${cvBuilderData.email} | ${cvBuilderData.phone}
@@ -233,6 +236,7 @@ Date: ${new Date().toLocaleDateString()}
   };
 
   const shareCVBuilderToCompany = (companyName: string, companyPhone: string) => {
+    alert("Send Application: KSh 100\n\nSend your CV to " + companyName + " for just KSh 100 via M-Pesa to +254 726 038 754\n\nCompany Contact: " + companyPhone);
     const cvContent = `APPLICATION FOR ${companyName.toUpperCase()}
 
 PERSONAL DETAILS
