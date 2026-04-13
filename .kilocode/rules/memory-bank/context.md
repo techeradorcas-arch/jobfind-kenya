@@ -8,7 +8,9 @@ A job board application with multiple company listings, job opportunities, and a
 
 ## Recently Completed
 
-- [x] Converted template to JobFind job board app
+- [x] Added Kenyan companies with telephone numbers (8 companies: Safaricom, Kenya Airways, Kenyatta University, Equity Bank, Kenya Power, Jumia Kenya, TechCorp Africa, Nestle Kenya)
+- [x] Added job section with direct contact numbers for companies
+- [x] Converted to KSh salaries
 - [x] Added hero section with search functionality
 - [x] Created company showcase section (6 companies)
 - [x] Added job listings (8 jobs with details)

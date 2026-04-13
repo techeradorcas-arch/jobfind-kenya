@@ -1,94 +1,116 @@
 "use client";
 
 const companies = [
-  { id: 1, name: "TechCorp", logo: "TC", color: "bg-blue-600", jobs: 23 },
-  { id: 2, name: "InnovateLabs", logo: "IL", color: "bg-purple-600", jobs: 15 },
-  { id: 3, name: "DataDriven", logo: "DD", color: "bg-green-600", jobs: 18 },
-  { id: 4, name: "CloudSync", logo: "CS", color: "bg-orange-600", jobs: 12 },
-  { id: 5, name: "AIWorks", logo: "AW", color: "bg-pink-600", jobs: 20 },
-  { id: 6, name: "ByteForce", logo: "BF", color: "bg-cyan-600", jobs: 9 },
+  { id: 1, name: "Safaricom", logo: "S", color: "bg-red-600", jobs: 45, phone: "+254 722 000000" },
+  { id: 2, name: "Kenya Airways", logo: "KA", color: "bg-yellow-600", jobs: 28, phone: "+254 20 827000" },
+  { id: 3, name: "Kenyatta University", logo: "KU", color: "bg-blue-600", jobs: 15, phone: "+254 20 871000" },
+  { id: 4, name: "Equity Bank", logo: "EB", color: "bg-green-600", jobs: 32, phone: "+254 763 100000" },
+  { id: 5, name: "Kenya Power", logo: "KP", color: "bg-yellow-700", jobs: 18, phone: "+254 20 3201000" },
+  { id: 6, name: "Jumia Kenya", logo: "J", color: "bg-orange-600", jobs: 22, phone: "+254 20 6807000" },
+  { id: 7, name: "TechCorp Africa", logo: "TC", color: "bg-purple-600", jobs: 12, phone: "+254 20 3752000" },
+  { id: 8, name: "Nestle Kenya", logo: "N", color: "bg-blue-700", jobs: 8, phone: "+254 20 3221000" },
 ];
 
 const jobs = [
   {
     id: 1,
-    title: "Senior Frontend Developer",
-    company: "TechCorp",
-    location: "San Francisco, CA",
+    title: "Senior Software Engineer",
+    company: "Safaricom",
+    location: "Nairobi, Kenya",
     type: "Full-time",
-    salary: "$120k - $160k",
+    salary: "KSh 150k - 250k",
     posted: "2 days ago",
-    tags: ["React", "TypeScript", "Next.js"],
+    tags: ["Java", "Cloud", "Microservices"],
   },
   {
     id: 2,
-    title: "Backend Engineer",
-    company: "InnovateLabs",
-    location: "Remote",
+    title: "Customer Service Manager",
+    company: "Kenya Airways",
+    location: "Nairobi, Kenya",
     type: "Full-time",
-    salary: "$110k - $150k",
+    salary: "KSh 120k - 180k",
     posted: "1 day ago",
-    tags: ["Node.js", "Python", "AWS"],
+    tags: ["Management", "CRM", "Aviation"],
   },
   {
     id: 3,
-    title: "Data Scientist",
-    company: "DataDriven",
-    location: "New York, NY",
+    title: "Lecturer - Computer Science",
+    company: "Kenyatta University",
+    location: "Kenyatta, Kenya",
     type: "Full-time",
-    salary: "$130k - $180k",
+    salary: "KSh 100k - 150k",
     posted: "3 days ago",
-    tags: ["Python", "ML", "TensorFlow"],
+    tags: ["Teaching", "Research", "IT"],
   },
   {
     id: 4,
-    title: "DevOps Engineer",
-    company: "CloudSync",
-    location: "Austin, TX",
+    title: "Branch Manager",
+    company: "Equity Bank",
+    location: "Mombasa, Kenya",
     type: "Full-time",
-    salary: "$100k - $140k",
+    salary: "KSh 180k - 250k",
     posted: "5 days ago",
-    tags: ["Docker", "Kubernetes", "CI/CD"],
+    tags: ["Finance", "Banking", "Management"],
   },
   {
     id: 5,
-    title: "Machine Learning Engineer",
-    company: "AIWorks",
-    location: "Seattle, WA",
+    title: "Electrical Engineer",
+    company: "Kenya Power",
+    location: "Nairobi, Kenya",
     type: "Full-time",
-    salary: "$140k - $200k",
+    salary: "KSh 130k - 200k",
     posted: "1 day ago",
-    tags: ["PyTorch", "Python", "AI"],
+    tags: ["Engineering", "Power", "Technical"],
   },
   {
     id: 6,
-    title: "Full Stack Developer",
-    company: "ByteForce",
-    location: "Remote",
-    type: "Contract",
-    salary: "$80k - $120k",
+    title: "Marketing Specialist",
+    company: "Jumia Kenya",
+    location: "Nairobi, Kenya",
+    type: "Full-time",
+    salary: "KSh 80k - 120k",
     posted: "4 days ago",
-    tags: ["React", "Node.js", "MongoDB"],
+    tags: ["Marketing", "E-commerce", "Digital"],
   },
   {
     id: 7,
-    title: "iOS Developer",
-    company: "TechCorp",
-    location: "Los Angeles, CA",
-    type: "Full-time",
-    salary: "$110k - $145k",
+    title: "Full Stack Developer",
+    company: "TechCorp Africa",
+    location: "Nairobi, Kenya",
+    type: "Contract",
+    salary: "KSh 100k - 180k",
     posted: "6 days ago",
-    tags: ["Swift", "iOS", "Objective-C"],
+    tags: ["React", "Node.js", "AWS"],
   },
   {
     id: 8,
-    title: "Cloud Architect",
-    company: "CloudSync",
-    location: "Chicago, IL",
+    title: "Sales Executive",
+    company: "Nestle Kenya",
+    location: "Nairobi, Kenya",
     type: "Full-time",
-    salary: "$150k - $190k",
+    salary: "KSh 90k - 140k",
     posted: "2 days ago",
-    tags: ["AWS", "Azure", "Terraform"],
+    tags: ["Sales", "FMCG", "Marketing"],
+  },
+  {
+    id: 9,
+    title: "Data Analyst",
+    company: "Safaricom",
+    location: "Nairobi, Kenya",
+    type: "Full-time",
+    salary: "KSh 100k - 160k",
+    posted: "3 days ago",
+    tags: ["Python", "SQL", "Analytics"],
+  },
+  {
+    id: 10,
+    title: "Human Resources Officer",
+    company: "Equity Bank",
+    location: "Nairobi, Kenya",
+    type: "Full-time",
+    salary: "KSh 90k - 130k",
+    posted: "1 day ago",
+    tags: ["HR", "Recruitment", "Training"],
   },
 ];
 
@@ -156,8 +178,8 @@ export default function Home() {
 
       <section id="companies" className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-white mb-8">Top Hiring Companies</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <h3 className="text-2xl font-bold text-white mb-8">Top Hiring Companies in Kenya</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {companies.map((company) => (
               <div
                 key={company.id}
@@ -170,8 +192,25 @@ export default function Home() {
                 </div>
                 <h4 className="text-white font-semibold">{company.name}</h4>
                 <p className="text-neutral-400 text-sm">{company.jobs} open positions</p>
+                <p className="text-blue-400 text-sm mt-1">{company.phone}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-neutral-800 rounded-lg p-6">
+            <h4 className="text-white font-semibold mb-4 text-center">Contact Top Kenyan Companies</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {companies.slice(0, 4).map((company) => (
+                <div key={company.id} className="bg-neutral-700 rounded-lg p-4 text-center">
+                  <p className="text-white font-medium">{company.name}</p>
+                  <p className="text-blue-400 font-semibold">{company.phone}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
