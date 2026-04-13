@@ -292,9 +292,9 @@ Date: ${new Date().toLocaleDateString()}
               window.scrollTo({ top: 0, behavior: 'smooth' });
               setActiveTab("jobs");
             }}
-            className="bg-white text-green-700 px-3 py-1 rounded font-semibold hover:bg-gray-100 transition"
+            className="bg-white text-green-700 px-3 py-1 rounded font-semibold hover:bg-gray-100 transition flex items-center gap-1"
           >
-            ← Back
+            <span>↑</span>
           </button>
           <span className="text-white">🇰🇪 Republic of Kenya</span>
           <span className="text-white/60">|</span>
