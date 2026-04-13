@@ -792,6 +792,23 @@ Phone: ${selectedCompanyData.phone}
 
       <div className="fixed bottom-20 left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
         <div className="max-w-6xl mx-auto flex items-center gap-6">
+          <span className="text-neutral-400 text-sm whitespace-nowrap">CV Tools:</span>
+          <div className="flex items-center gap-4">
+            <button onClick={() => setActiveTab("cvbuilder")} className="flex items-center gap-2 bg-blue-600 rounded-full px-4 py-2 cursor-pointer hover:bg-blue-700 transition">
+              <span className="text-white text-sm whitespace-nowrap">CV Builder</span>
+            </button>
+            <button onClick={() => setActiveTab("cv")} className="flex items-center gap-2 bg-neutral-700 rounded-full px-4 py-2 cursor-pointer hover:bg-neutral-600 transition">
+              <span className="text-white text-sm whitespace-nowrap">Export CV</span>
+            </button>
+            <button onClick={() => setActiveTab("cvwriter")} className="flex items-center gap-2 bg-purple-600 rounded-full px-4 py-2 cursor-pointer hover:bg-purple-700 transition">
+              <span className="text-white text-sm whitespace-nowrap">AI Writer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="fixed bottom-[140px] left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
+        <div className="max-w-6xl mx-auto flex items-center gap-6">
           <span className="text-neutral-400 text-sm whitespace-nowrap">Our Partners:</span>
           <div className="flex items-center gap-4">
             {companies.map((company) => (
