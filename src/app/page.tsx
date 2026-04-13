@@ -63,6 +63,7 @@ export default function Home() {
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
+  const [selectedScholarship, setSelectedScholarship] = useState<number | null>(null);
   const [cvBuilderData, setCvBuilderData] = useState({
     fullName: "", email: "", phone: "", address: "", linkedin: "", portfolio: "",
     objective: "", skills: "", workHistory: "", education: "", certifications: "", languages: "", refs: ""
@@ -492,7 +493,11 @@ Date: ${new Date().toLocaleDateString()}
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {scholarships.map((scholarship) => (
-                <div key={scholarship.id} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-green-500">
+                <div 
+                  key={scholarship.id} 
+                  onClick={() => setSelectedScholarship(scholarship.id)}
+                  className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-green-500"
+                >
                   <div className="h-40 overflow-hidden">
                     <img src={scholarship.image} alt={scholarship.name} className="w-full h-full object-cover" />
                   </div>
@@ -514,6 +519,53 @@ Date: ${new Date().toLocaleDateString()}
             </div>
           </div>
         </section>
+      )}
+
+      {selectedScholarship && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/70" onClick={() => setSelectedScholarship(null)} />
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setSelectedScholarship(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+            {(() => {
+              const scholarship = scholarships.find(s => s.id === selectedScholarship);
+              return (
+                <>
+                  <div className="h-40 overflow-hidden rounded-lg mb-4">
+                    <img src={scholarship?.image} alt={scholarship?.name} className="w-full h-full object-cover" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">{scholarship?.name}</h3>
+                  <p className="text-green-400 font-semibold mb-4">{scholarship?.provider}</p>
+                  
+                  <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                    <h4 className="text-white font-semibold mb-3">Scholarship Details</h4>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Location:</strong> {scholarship?.location}</p>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Level:</strong> {scholarship?.level}</p>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Amount:</strong> {scholarship?.amount}</p>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Deadline:</strong> {scholarship?.deadline}</p>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Field:</strong> {scholarship?.field}</p>
+                    <p className="text-neutral-300 text-sm"><strong>Eligibility:</strong> {scholarship?.eligibility}</p>
+                  </div>
+                  
+                  <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                    <h4 className="text-white font-semibold mb-2">Description</h4>
+                    <p className="text-neutral-300 text-sm">{scholarship?.description}</p>
+                  </div>
+                  
+                  <p className="text-yellow-400 text-sm text-center mb-4">Application Fee: KSh 100 via M-Pesa to +254 726 038 754</p>
+                  
+                  <div className="flex flex-col gap-3">
+                    <button className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                      Apply Now
+                    </button>
+                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                      Contact Provider
+                    </button>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
       )}
 
       {activeTab === "companies" && (
