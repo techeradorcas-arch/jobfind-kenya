@@ -123,6 +123,46 @@ const adBanners = [
 
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv">("jobs");
+  const [cvData, setCvData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    jobTitle: "",
+    summary: "",
+    skills: "",
+    experience: "",
+    education: ""
+  });
+
+  const handleExportCV = () => {
+    const cvContent = `
+${cvData.firstName} ${cvData.lastName}
+Email: ${cvData.email} | Phone: ${cvData.phone}
+Job Title: ${cvData.jobTitle}
+
+SUMMARY
+${cvData.summary}
+
+SKILLS
+${cvData.skills}
+
+WORK EXPERIENCE
+${cvData.experience}
+
+EDUCATION
+${cvData.education}
+    `.trim();
+
+    const blob = new Blob([cvContent], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${cvData.firstName || "My"}_CV.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <main className="min-h-screen bg-neutral-900">
@@ -133,8 +173,9 @@ export default function Home() {
               <span className="text-blue-500">Job</span>Find
             </h1>
             <nav className="hidden md:flex gap-6">
-              <a href="#jobs" className="text-neutral-300 hover:text-white transition">Jobs</a>
-              <button onClick={() => document.getElementById('companies')?.scrollIntoView({ behavior: 'smooth' })} className="text-neutral-300 hover:text-white transition">Companies</button>
+              <button onClick={() => setActiveTab("jobs")} className={`${activeTab === "jobs" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Jobs</button>
+              <button onClick={() => setActiveTab("companies")} className={`${activeTab === "companies" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Companies</button>
+              <button onClick={() => setActiveTab("cv")} className={`${activeTab === "cv" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Export CV</button>
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
                 Post a Job
               </button>
@@ -180,6 +221,7 @@ export default function Home() {
         </div>
       </section>
 
+      {activeTab === "companies" && (
       <section id="companies" className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <h3 className="text-2xl font-bold text-white mb-8">Top Hiring Companies in Kenya</h3>
@@ -203,8 +245,62 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
-      {selectedCompany && (
+      {activeTab === "cv" && (
+      <section className="py-12 px-4">
+        <div className="max-w-2xl mx-auto">
+          <h3 className="text-2xl font-bold text-white mb-2 text-center">Export Your CV</h3>
+          <p className="text-neutral-400 mb-8 text-center">Create and download your professional CV</p>
+          
+          <div className="bg-neutral-800 rounded-lg p-6 space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-white text-sm mb-1 block">First Name</label>
+                <input type="text" placeholder="John" value={cvData.firstName} onChange={(e) => setCvData({...cvData, firstName: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+              </div>
+              <div>
+                <label className="text-white text-sm mb-1 block">Last Name</label>
+                <input type="text" placeholder="Doe" value={cvData.lastName} onChange={(e) => setCvData({...cvData, lastName: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+              </div>
+            </div>
+            <div>
+              <label className="text-white text-sm mb-1 block">Email</label>
+              <input type="email" placeholder="john.doe@email.com" value={cvData.email} onChange={(e) => setCvData({...cvData, email: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+            </div>
+            <div>
+              <label className="text-white text-sm mb-1 block">Phone</label>
+              <input type="tel" placeholder="+254 700 000000" value={cvData.phone} onChange={(e) => setCvData({...cvData, phone: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+            </div>
+            <div>
+              <label className="text-white text-sm mb-1 block">Job Title</label>
+              <input type="text" placeholder="Software Engineer" value={cvData.jobTitle} onChange={(e) => setCvData({...cvData, jobTitle: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+            </div>
+            <div>
+              <label className="text-white text-sm mb-1 block">Summary</label>
+              <textarea placeholder="Brief summary of your professional background..." rows={3} value={cvData.summary} onChange={(e) => setCvData({...cvData, summary: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+            </div>
+            <div>
+              <label className="text-white text-sm mb-1 block">Skills (comma separated)</label>
+              <input type="text" placeholder="JavaScript, React, Node.js, Python" value={cvData.skills} onChange={(e) => setCvData({...cvData, skills: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+            </div>
+            <div>
+              <label className="text-white text-sm mb-1 block">Work Experience</label>
+              <textarea placeholder="Company Name - Role - Duration\nCompany Name - Role - Duration" rows={3} value={cvData.experience} onChange={(e) => setCvData({...cvData, experience: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+            </div>
+            <div>
+              <label className="text-white text-sm mb-1 block">Education</label>
+              <textarea placeholder="University Name - Degree - Year\nHigh School - Certificate - Year" rows={3} value={cvData.education} onChange={(e) => setCvData({...cvData, education: e.target.value})} className="w-full bg-neutral-700 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500" />
+            </div>
+            <button onClick={handleExportCV} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+              Download CV
+            </button>
+          </div>
+        </div>
+      </section>
+      )}
+
+      {activeTab === "jobs" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70" onClick={() => setSelectedCompany(null)} />
           <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full">
@@ -253,6 +349,8 @@ export default function Home() {
         </div>
       </section>
 
+      {activeTab === "jobs" && (
+      <>
       <section className="py-8 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="bg-neutral-800 rounded-lg p-4 text-center min-h-[250px] flex items-center justify-center">
@@ -296,6 +394,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </>
+      )}
 
       <section className="py-8 px-4">
         <div className="max-w-6xl mx-auto">
