@@ -44,9 +44,22 @@ const companyNews = [
   { id: 8, company: "TechCorp Africa", title: "TechCorp Africa Launches AI Division", description: "New artificial intelligence research division in Mombasa seeking 50 machine learning engineers.", date: "March 20, 2026", category: "Innovation", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop" },
 ];
 
+const scholarships = [
+  { id: 1, name: "Kenya Government Scholarship", provider: "Government of Kenya", location: "Kenya", level: "Undergraduate", amount: "KSh 500,000", deadline: "May 30, 2026", field: "All Fields", eligibility: "KCSE Grade B+ and above", description: "Full scholarship for Kenyan students pursuing undergraduate studies in local universities.", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
+  { id: 2, name: "Commonwealth Scholarship", provider: "Commonwealth", location: "UK, Australia, Canada", level: "Masters/PhD", amount: "Full Tuition + Living", deadline: "June 15, 2026", field: "All Fields", eligibility: "First Class Honors", description: "Fully funded scholarship for students from Commonwealth countries to pursue postgraduate studies.", image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=300&fit=crop" },
+  { id: 3, name: "USAID Scholarship", provider: "USAID", location: "United States", level: "Undergraduate", amount: "$25,000/year", deadline: "April 30, 2026", field: "STEM", eligibility: "Academic Excellence", description: "Scholarship for students pursuing Science, Technology, Engineering, and Mathematics.", image: "https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=400&h=300&fit=crop" },
+  { id: 4, name: "EU Scholarship", provider: "European Union", location: "Europe", level: "Masters", amount: "€25,000", deadline: "July 1, 2026", field: "Any", eligibility: "Bachelor's Degree", description: "Erasmus+ scholarship for Master's students to study in European universities.", image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=300&fit=crop" },
+  { id: 5, name: "Safaricom Foundation Scholarship", provider: "Safaricom", location: "Kenya", level: "Undergraduate", amount: "KSh 300,000", deadline: "May 15, 2026", field: "IT & Engineering", eligibility: "Financial Need + Good Grades", description: "Scholarship for bright students from underprivileged backgrounds in IT and Engineering.", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop" },
+  { id: 6, name: "JKUAT Merit Scholarship", provider: "JKUAT", location: "Kenya", level: "Undergraduate", amount: "Full Tuition", deadline: "June 1, 2026", field: "Engineering", eligibility: "KCSE A- and above", description: "Merit-based scholarship for top-performing students in Engineering courses.", image: "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop" },
+  { id: 7, name: "Australia Awards Scholarship", provider: "Australian Government", location: "Australia", level: "Masters/PhD", amount: "Full Scholarship", deadline: "June 30, 2026", field: "Any", eligibility: "Working Experience", description: "Australia Awards scholarships for students from developing countries.", image: "https://images.unsplash.com/photo-1507504031990-8a45cf3b2fad?w=400&h=300&fit=crop" },
+  { id: 8, name: "China Government Scholarship", provider: "China Scholarship Council", location: "China", level: "Any", amount: "Full Tuition + Stipend", deadline: "April 30, 2026", field: "Any", eligibility: "Academic Excellence", description: "Bilateral scholarship program for international students to study in China.", image: "https://images.unsplash.com/photo-1580392278097-f4d7b0f3d9c6?w=400&h=300&fit=crop" },
+  { id: 9, name: "Equity Group Foundation", provider: "Equity Bank", location: "Kenya", level: "Undergraduate", amount: "KSh 250,000", deadline: "May 20, 2026", field: "Business/Finance", eligibility: "Vulnerable Students", description: "Scholarship for orphaned and vulnerable students in Kenya.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" },
+  { id: 10, name: "Kenyatta University Sports Scholarship", provider: "Kenyatta University", location: "Kenya", level: "Undergraduate", amount: "Half Tuition", deadline: "May 31, 2026", field: "Any", eligibility: "Sports Excellence", description: "Sports scholarship for talented athletes to pursue their education.", image: "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop" },
+];
+
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "advertise">("jobs");
+  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise">("jobs");
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
@@ -286,6 +299,7 @@ Date: ${new Date().toLocaleDateString()}
             <nav className="hidden md:flex gap-6">
               <button onClick={() => setActiveTab("jobs")} className={`${activeTab === "jobs" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Jobs</button>
               <button onClick={() => setActiveTab("news")} className={`${activeTab === "news" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>News</button>
+              <button onClick={() => setActiveTab("scholarships")} className={`${activeTab === "scholarships" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Scholarships</button>
               <button onClick={() => setActiveTab("companies")} className={`${activeTab === "companies" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Companies</button>
               <button onClick={() => setActiveTab("cvbuilder")} className={`${activeTab === "cvbuilder" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>CV Builder</button>
               <button onClick={() => setActiveTab("cv")} className={`${activeTab === "cv" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Export CV</button>
@@ -433,6 +447,38 @@ Date: ${new Date().toLocaleDateString()}
                     <span className="bg-green-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{news.category}</span>
                     <h4 className="text-white font-semibold mb-2">{news.title}</h4>
                     <p className="text-neutral-400 text-sm">{news.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {activeTab === "scholarships" && (
+        <section className="py-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-2 text-center">Scholarships for Students</h3>
+            <p className="text-neutral-400 mb-8 text-center">Find fully funded scholarships to study in Kenya and abroad</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {scholarships.map((scholarship) => (
+                <div key={scholarship.id} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-green-500">
+                  <div className="h-40 overflow-hidden">
+                    <img src={scholarship.image} alt={scholarship.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-green-400 text-sm font-semibold">{scholarship.provider}</span>
+                      <span className="text-neutral-500 text-xs">{scholarship.deadline}</span>
+                    </div>
+                    <h4 className="text-white font-semibold mb-2">{scholarship.name}</h4>
+                    <p className="text-neutral-400 text-sm mb-2">{scholarship.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">{scholarship.level}</span>
+                      <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">{scholarship.location}</span>
+                    </div>
+                    <p className="text-green-400 font-bold">{scholarship.amount}</p>
                   </div>
                 </div>
               ))}
@@ -886,6 +932,9 @@ Phone: ${selectedCompanyData.phone}
           <span className="text-neutral-400 text-sm whitespace-nowrap">Quick Access:</span>
           <button onClick={() => setActiveTab("news")} className="flex items-center gap-2 bg-green-600 rounded-full px-4 py-2 cursor-pointer hover:bg-green-700 transition">
             <span className="text-white text-sm whitespace-nowrap">News</span>
+          </button>
+          <button onClick={() => setActiveTab("scholarships")} className="flex items-center gap-2 bg-yellow-600 rounded-full px-4 py-2 cursor-pointer hover:bg-yellow-700 transition">
+            <span className="text-white text-sm whitespace-nowrap">Scholarships</span>
           </button>
           <div className="flex items-center gap-4">
             <button onClick={() => setActiveTab("cvbuilder")} className="flex items-center gap-2 bg-blue-600 rounded-full px-4 py-2 cursor-pointer hover:bg-blue-700 transition">
