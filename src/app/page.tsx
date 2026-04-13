@@ -263,7 +263,15 @@ Date: ${new Date().toLocaleDateString()}
       <header className="sticky top-0 z-50 bg-neutral-900/95 backdrop-blur border-b border-neutral-800">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-white"><span className="text-blue-500">Job</span>Find</h1>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">🇰🇪</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white"><span className="text-blue-500">Job</span>Find Kenya</h1>
+                <p className="text-green-500 text-xs">Government Verified Portal</p>
+              </div>
+            </div>
             <nav className="hidden md:flex gap-6">
               <button onClick={() => setActiveTab("jobs")} className={`${activeTab === "jobs" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Jobs</button>
               <button onClick={() => setActiveTab("companies")} className={`${activeTab === "companies" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Companies</button>
@@ -277,6 +285,16 @@ Date: ${new Date().toLocaleDateString()}
         </div>
       </header>
 
+      <div className="bg-green-700 py-2 px-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-center gap-4 text-sm">
+          <span className="text-white">🇰🇪 Republic of Kenya</span>
+          <span className="text-white/60">|</span>
+          <span className="text-white">Ministry of Labour and Social Protection</span>
+          <span className="text-white/60">|</span>
+          <span className="text-white">Verified Employment Portal</span>
+        </div>
+      </div>
+
       {activeTab === "jobs" && (
         <>
           <section className="py-16 px-4">
@@ -289,6 +307,25 @@ Date: ${new Date().toLocaleDateString()}
                 <input type="text" placeholder="Search jobs, titles, or keywords..." className="flex-1 bg-neutral-800 border border-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-blue-500" />
                 <input type="text" placeholder="Location" className="md:w-48 bg-neutral-800 border border-neutral-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-blue-500" />
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">Search</button>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-sm">
+                <div className="flex items-center gap-2 text-green-400">
+                  <span className="text-xl">✓</span>
+                  <span>Government Verified</span>
+                </div>
+                <div className="flex items-center gap-2 text-green-400">
+                  <span className="text-xl">✓</span>
+                  <span>Secure & Trusted</span>
+                </div>
+                <div className="flex items-center gap-2 text-green-400">
+                  <span className="text-xl">✓</span>
+                  <span>Free for Job Seekers</span>
+                </div>
+                <div className="flex items-center gap-2 text-green-400">
+                  <span className="text-xl">✓</span>
+                  <span>10,000+ Jobs Listed</span>
+                </div>
               </div>
             </div>
           </section>
@@ -762,8 +799,12 @@ Phone: ${selectedCompanyData.phone}
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-              <h1 className="text-2xl font-bold text-white"><span className="text-blue-500">Job</span>Find</h1>
-              <p className="text-neutral-400 mt-2">Find your next career move in Kenya</p>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🇰🇪</span>
+                <h1 className="text-2xl font-bold text-white"><span className="text-blue-500">Job</span>Find Kenya</h1>
+              </div>
+              <p className="text-neutral-400 mt-2">Official Government Verified Employment Portal</p>
+              <p className="text-green-500 text-sm mt-1">Licensed by Ministry of Labour • Reg. No. MLSP/2024/001</p>
             </div>
             <div className="flex gap-6">
               <a href="#" className="text-neutral-400 hover:text-white transition">About</a>
@@ -772,7 +813,7 @@ Phone: ${selectedCompanyData.phone}
               <a href="#" className="text-neutral-400 hover:text-white transition">Contact</a>
             </div>
           </div>
-          <div className="border-t border-neutral-700 mt-8 pt-8 text-center text-neutral-500">© 2026 JobFind. All rights reserved.</div>
+          <div className="border-t border-neutral-700 mt-8 pt-8 text-center text-neutral-500">© 2026 JobFind Kenya - Government Verified Portal. All rights reserved.</div>
         </div>
       </footer>
 

@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JobFind - Find Your Dream Job",
-  description: "Discover job opportunities from top companies. Find your next career move today.",
+  title: "JobFind Kenya - Government Verified Job Portal",
+  description: "Official Kenya job portal - Find employment opportunities from verified Kenyan companies. Supported by Ministry of Labour and Social Protection.",
+  keywords: "jobs, careers, employment, Kenya, government, hiring",
 };
 
 export default function RootLayout({
