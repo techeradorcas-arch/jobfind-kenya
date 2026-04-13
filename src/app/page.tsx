@@ -69,7 +69,7 @@ ${cvData.education}`.trim();
   const selectedCompanyData = companies.find(c => c.id === selectedCompany);
 
   return (
-    <main className="min-h-screen bg-neutral-900">
+    <main className="min-h-screen bg-neutral-900 pb-20">
       <header className="sticky top-0 z-50 bg-neutral-900/95 backdrop-blur border-b border-neutral-800">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -326,6 +326,20 @@ ${cvData.education}`.trim();
           <div className="border-t border-neutral-700 mt-8 pt-8 text-center text-neutral-500">© 2026 JobFind. All rights reserved.</div>
         </div>
       </footer>
+
+      <div className="fixed bottom-0 left-0 right-0 bg-green-600 p-4 z-50">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <span className="text-white font-semibold">Support JobFind via M-Pesa:</span>
+            <span className="text-white font-bold text-xl">KSh 1,000</span>
+            <span className="text-white/80">to</span>
+            <span className="text-white font-bold">+254 726 038 754</span>
+          </div>
+          <button onClick={() => setActiveTab("advertise")} className="bg-white text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+            Advertise With Us
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
