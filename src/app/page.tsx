@@ -26,6 +26,13 @@ const jobs = [
   { id: 10, title: "Human Resources Officer", company: "Equity Bank", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 90k - 130k", posted: "1 day ago", tags: ["HR", "Recruitment", "Training"] },
 ];
 
+const companyAds = [
+  { id: 1, company: "Safaricom", title: "Hiring Now! Join Kenya's Leading Telecom", description: "We are looking for talented professionals. Apply now!", cta: "Apply Now", color: "bg-red-600", phone: "+254 722 000000" },
+  { id: 2, company: "Equity Bank", title: "Grow Your Career in Banking", description: "Join Kenya's fastest growing bank. Competitive benefits!", cta: "Apply Now", color: "bg-green-600", phone: "+254 763 100000" },
+  { id: 3, company: "Kenya Airways", title: "Sky is Not the Limit - Join Us!", description: "Experience the world. Build your career with us.", cta: "Apply Now", color: "bg-yellow-600", phone: "+254 20 827000" },
+  { id: 4, company: "Kenya Power", title: "Powering Kenya's Future", description: "Be part of the energy revolution. Engineering jobs available!", cta: "Apply Now", color: "bg-yellow-700", phone: "+254 20 3201000" },
+];
+
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv">("jobs");
@@ -94,16 +101,32 @@ ${cvData.education}`.trim();
 
           <section className="py-8 px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="bg-neutral-800 rounded-lg p-4 text-center min-h-[90px] flex items-center justify-center">
-                <span className="text-neutral-500">Advertisement Banner - 728x90</span>
+              <h4 className="text-neutral-500 text-sm mb-4">Sponsored</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {companyAds.slice(0, 2).map((ad) => (
+                  <div key={ad.id} className={`${ad.color} rounded-lg p-6 cursor-pointer hover:opacity-90 transition`}>
+                    <p className="text-white/80 text-sm font-medium mb-1">Sponsored Ad</p>
+                    <h4 className="text-white text-xl font-bold mb-2">{ad.title}</h4>
+                    <p className="text-white/80 text-sm mb-3">{ad.description}</p>
+                    <p className="text-white font-semibold">{ad.phone}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
 
           <section className="py-8 px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="bg-neutral-800 rounded-lg p-4 text-center min-h-[250px] flex items-center justify-center">
-                <span className="text-neutral-500">Advertisement Banner - 970x250</span>
+              <h4 className="text-neutral-500 text-sm mb-4">Featured Companies</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {companyAds.slice(2, 4).map((ad) => (
+                  <div key={ad.id} className={`${ad.color} rounded-lg p-6 cursor-pointer hover:opacity-90 transition`}>
+                    <p className="text-white/80 text-sm font-medium mb-1">Featured</p>
+                    <h4 className="text-white text-xl font-bold mb-2">{ad.title}</h4>
+                    <p className="text-white/80 text-sm mb-3">{ad.description}</p>
+                    <p className="text-white font-semibold">{ad.phone}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
