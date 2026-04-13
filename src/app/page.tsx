@@ -33,9 +33,20 @@ const companyAds = [
   { id: 4, company: "Kenya Power", title: "Powering Kenya's Future", description: "Be part of the energy revolution. Engineering jobs available!", cta: "Apply Now", color: "bg-yellow-700", phone: "+254 20 3201000" },
 ];
 
+const companyNews = [
+  { id: 1, company: "Safaricom", title: "Safaricom Announces 500 New Jobs in 2026", description: "Kenya's leading telecom company plans to hire 500 new employees across various departments including IT, Customer Service, and Engineering.", date: "April 10, 2026", category: "Expansion", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop" },
+  { id: 2, company: "Equity Bank", title: "Equity Bank Launches New Digital Banking Platform", description: "Equity Bank has unveiled a new mobile banking app, creating 50 new jobs in technology and customer support.", date: "April 8, 2026", category: "Innovation", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" },
+  { id: 3, company: "Kenya Airways", title: "Kenya Airways Expands Routes to Europe", description: "New flights to Paris and London mean 200 new positions for pilots, cabin crew, and ground staff.", date: "April 5, 2026", category: "Expansion", image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=300&fit=crop" },
+  { id: 4, company: "Kenya Power", title: "Kenya Power Grid Expansion Project", description: "Government-backed project to connect 500,000 new households creates 300 engineering and technical jobs.", date: "April 3, 2026", category: "Infrastructure", image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop" },
+  { id: 5, company: "Kenyatta University", title: "Kenyatta University Opens New Tech Hub", description: "New innovation center to train 1000 students annually in software development and data science.", date: "April 1, 2026", category: "Education", image: "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop" },
+  { id: 6, company: "Jumia Kenya", title: "Jumia Kenya Reports Record Growth in 2026", description: "E-commerce giant sees 40% growth, planning to hire 150 more delivery and operations staff.", date: "March 28, 2026", category: "Growth", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop" },
+  { id: 7, company: "Nestle Kenya", title: "Nestle Kenya Invests KSh 2B in Local Production", description: "New manufacturing facility in Nairobi to create 200 jobs in production and logistics.", date: "March 25, 2026", category: "Investment", image: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=400&h=300&fit=crop" },
+  { id: 8, company: "TechCorp Africa", title: "TechCorp Africa Launches AI Division", description: "New artificial intelligence research division in Mombasa seeking 50 machine learning engineers.", date: "March 20, 2026", category: "Innovation", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop" },
+];
+
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "advertise">("jobs");
+  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "advertise">("jobs");
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
@@ -274,6 +285,7 @@ Date: ${new Date().toLocaleDateString()}
             </div>
             <nav className="hidden md:flex gap-6">
               <button onClick={() => setActiveTab("jobs")} className={`${activeTab === "jobs" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Jobs</button>
+              <button onClick={() => setActiveTab("news")} className={`${activeTab === "news" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>News</button>
               <button onClick={() => setActiveTab("companies")} className={`${activeTab === "companies" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Companies</button>
               <button onClick={() => setActiveTab("cvbuilder")} className={`${activeTab === "cvbuilder" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>CV Builder</button>
               <button onClick={() => setActiveTab("cv")} className={`${activeTab === "cv" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Export CV</button>
@@ -399,6 +411,34 @@ Date: ${new Date().toLocaleDateString()}
             </div>
           </section>
         </>
+      )}
+
+      {activeTab === "news" && (
+        <section className="py-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-2 text-center">Company News & Progress</h3>
+            <p className="text-neutral-400 mb-8 text-center">Latest updates from top Kenyan companies</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {companyNews.map((news) => (
+                <div key={news.id} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer">
+                  <div className="h-40 overflow-hidden">
+                    <img src={news.image} alt={news.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-blue-400 text-sm font-semibold">{news.company}</span>
+                      <span className="text-neutral-500 text-xs">{news.date}</span>
+                    </div>
+                    <span className="bg-green-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{news.category}</span>
+                    <h4 className="text-white font-semibold mb-2">{news.title}</h4>
+                    <p className="text-neutral-400 text-sm">{news.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
       {activeTab === "companies" && (
