@@ -287,6 +287,15 @@ Date: ${new Date().toLocaleDateString()}
 
       <div className="bg-green-700 py-2 px-4">
         <div className="max-w-6xl mx-auto flex items-center justify-center gap-4 text-sm">
+          <button 
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setActiveTab("jobs");
+            }}
+            className="bg-white text-green-700 px-3 py-1 rounded font-semibold hover:bg-gray-100 transition"
+          >
+            ← Back
+          </button>
           <span className="text-white">🇰🇪 Republic of Kenya</span>
           <span className="text-white/60">|</span>
           <span className="text-white">Ministry of Labour and Social Protection</span>
@@ -830,19 +839,7 @@ Phone: ${selectedCompanyData.phone}
           </button>
         </div>
       </div>
-
-      <button 
-        onClick={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          setActiveTab("jobs");
-        }}
-        className="fixed top-24 right-4 z-50 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition"
-        title="Back to Top"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-        </svg>
-      </button>
+      
 
       <div className="fixed bottom-20 left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
         <div className="max-w-6xl mx-auto flex items-center gap-6">
