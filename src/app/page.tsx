@@ -890,20 +890,7 @@ Phone: ${selectedCompanyData.phone}
       </div>
       )}
 
-      <div className="fixed bottom-[220px] left-0 right-0 bg-yellow-600 border-t border-yellow-500 p-3 z-40 overflow-x-auto">
-        <div className="max-w-6xl mx-auto flex items-center gap-6">
-          <span className="text-white text-sm font-semibold whitespace-nowrap">🎓 Scholarships:</span>
-          <div className="flex items-center gap-4 overflow-x-auto">
-            {scholarships.slice(0, 6).map((scholarship) => (
-              <button key={scholarship.id} onClick={() => setActiveTab("scholarships")} className="flex items-center gap-2 bg-white/20 rounded-full px-3 py-1 cursor-pointer hover:bg-white/30 transition whitespace-nowrap">
-                <span className="text-white text-xs">{scholarship.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="fixed bottom-20 left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
+      <div className="fixed bottom-[140px] left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
         <div className="max-w-6xl mx-auto flex items-center gap-6">
           <span className="text-neutral-400 text-sm whitespace-nowrap">Quick Access:</span>
           <button onClick={() => setActiveTab("news")} className="flex items-center gap-2 bg-green-600 rounded-full px-4 py-2 cursor-pointer hover:bg-green-700 transition">
@@ -922,6 +909,19 @@ Phone: ${selectedCompanyData.phone}
             <button onClick={() => setActiveTab("cvwriter")} className="flex items-center gap-2 bg-purple-600 rounded-full px-4 py-2 cursor-pointer hover:bg-purple-700 transition">
               <span className="text-white text-sm whitespace-nowrap">AI Writer</span>
             </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="fixed bottom-[260px] left-0 right-0 bg-yellow-600 border-t border-yellow-500 p-3 z-40 overflow-x-auto">
+        <div className="max-w-6xl mx-auto flex items-center gap-6">
+          <span className="text-white text-sm font-semibold whitespace-nowrap">🎓 Scholarships:</span>
+          <div className="flex items-center gap-4 overflow-x-auto">
+            {scholarships.slice(0, 6).map((scholarship) => (
+              <button key={scholarship.id} onClick={() => setActiveTab("scholarships")} className="flex items-center gap-2 bg-white/20 rounded-full px-3 py-1 cursor-pointer hover:bg-white/30 transition whitespace-nowrap">
+                <span className="text-white text-xs">{scholarship.name}</span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
