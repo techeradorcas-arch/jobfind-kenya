@@ -305,11 +305,43 @@ ${cvData.education}`.trim();
               <p className="text-neutral-300 text-sm">{selectedCompanyData.requirements}</p>
             </div>
             <p className="text-neutral-400 text-sm text-center mb-4">{selectedCompanyData.jobs} open positions</p>
+            <p className="text-neutral-400 text-sm text-center mb-4">{selectedCompanyData.jobs} open positions</p>
             <div className="space-y-3">
               <p className="text-white font-semibold text-center">Apply with your CV</p>
-              <button onClick={() => { setSelectedCompany(null); setActiveTab("cv"); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                Export CV & Apply
+              <button onClick={() => { 
+                const companyName = selectedCompanyData.name;
+                const newCvContent = `Application for ${companyName}
+Email: ${cvData.email} | Phone: ${cvData.phone}
+Job Title: ${cvData.jobTitle}
+
+SUMMARY
+${cvData.summary}
+
+SKILLS
+${cvData.skills}
+
+WORK EXPERIENCE
+${cvData.experience}
+
+EDUCATION
+${cvData.education}
+
+---
+Applied to: ${companyName}
+Location: ${selectedCompanyData.location}
+Phone: ${selectedCompanyData.phone}
+                `.trim();
+                const blob = new Blob([newCvContent], { type: "text/plain" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `CV_${companyName.replace(/\s+/g, "_")}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+              }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                Apply with your CV
               </button>
+              <p className="text-neutral-500 text-xs text-center">Download your CV with application to {selectedCompanyData.name}</p>
             </div>
           </div>
         </div>
