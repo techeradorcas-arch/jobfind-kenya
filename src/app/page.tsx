@@ -14,16 +14,16 @@ const companies = [
 ];
 
 const jobs = [
-  { id: 1, title: "Senior Software Engineer", company: "Safaricom", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 150k - 250k", posted: "2 days ago", tags: ["Java", "Cloud", "Microservices"] },
-  { id: 2, title: "Customer Service Manager", company: "Kenya Airways", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 120k - 180k", posted: "1 day ago", tags: ["Management", "CRM", "Aviation"] },
-  { id: 3, title: "Lecturer - Computer Science", company: "Kenyatta University", location: "Kenyatta, Kenya", type: "Full-time", salary: "KSh 100k - 150k", posted: "3 days ago", tags: ["Teaching", "Research", "IT"] },
-  { id: 4, title: "Branch Manager", company: "Equity Bank", location: "Mombasa, Kenya", type: "Full-time", salary: "KSh 180k - 250k", posted: "5 days ago", tags: ["Finance", "Banking", "Management"] },
-  { id: 5, title: "Electrical Engineer", company: "Kenya Power", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 130k - 200k", posted: "1 day ago", tags: ["Engineering", "Power", "Technical"] },
-  { id: 6, title: "Marketing Specialist", company: "Jumia Kenya", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 80k - 120k", posted: "4 days ago", tags: ["Marketing", "E-commerce", "Digital"] },
-  { id: 7, title: "Full Stack Developer", company: "TechCorp Africa", location: "Mombasa, Kenya", type: "Contract", salary: "KSh 100k - 180k", posted: "6 days ago", tags: ["React", "Node.js", "AWS"] },
-  { id: 8, title: "Sales Executive", company: "Nestle Kenya", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 90k - 140k", posted: "2 days ago", tags: ["Sales", "FMCG", "Marketing"] },
-  { id: 9, title: "Data Analyst", company: "Safaricom", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 100k - 160k", posted: "3 days ago", tags: ["Python", "SQL", "Analytics"] },
-  { id: 10, title: "Human Resources Officer", company: "Equity Bank", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 90k - 130k", posted: "1 day ago", tags: ["HR", "Recruitment", "Training"] },
+  { id: 1, title: "Senior Software Engineer", company: "Safaricom", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 150k - 250k", posted: "2 days ago", tags: ["Java", "Cloud", "Microservices"], image: "https://images.unsplash.com/photo-1519389950473-47ba027e1cd4?w=400&h=300&fit=crop" },
+  { id: 2, title: "Customer Service Manager", company: "Kenya Airways", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 120k - 180k", posted: "1 day ago", tags: ["Management", "CRM", "Aviation"], image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=300&fit=crop" },
+  { id: 3, title: "Lecturer - Computer Science", company: "Kenyatta University", location: "Kenyatta, Kenya", type: "Full-time", salary: "KSh 100k - 150k", posted: "3 days ago", tags: ["Teaching", "Research", "IT"], image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
+  { id: 4, title: "Branch Manager", company: "Equity Bank", location: "Mombasa, Kenya", type: "Full-time", salary: "KSh 180k - 250k", posted: "5 days ago", tags: ["Finance", "Banking", "Management"], image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" },
+  { id: 5, title: "Electrical Engineer", company: "Kenya Power", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 130k - 200k", posted: "1 day ago", tags: ["Engineering", "Power", "Technical"], image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop" },
+  { id: 6, title: "Marketing Specialist", company: "Jumia Kenya", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 80k - 120k", posted: "4 days ago", tags: ["Marketing", "E-commerce", "Digital"], image: "https://images.unsplash.com/photo-1460925895917-afdab827c52b?w=400&h=300&fit=crop" },
+  { id: 7, title: "Full Stack Developer", company: "TechCorp Africa", location: "Mombasa, Kenya", type: "Contract", salary: "KSh 100k - 180k", posted: "6 days ago", tags: ["React", "Node.js", "AWS"], image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop" },
+  { id: 8, title: "Sales Executive", company: "Nestle Kenya", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 90k - 140k", posted: "2 days ago", tags: ["Sales", "FMCG", "Marketing"], image: "https://images.unsplash.com/photo-1556745757-8d30777c0643?w=400&h=300&fit=crop" },
+  { id: 9, title: "Data Analyst", company: "Safaricom", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 100k - 160k", posted: "3 days ago", tags: ["Python", "SQL", "Analytics"], image: "https://images.unsplash.com/photo-1551288049-bebda4e02f72?w=400&h=300&fit=crop" },
+  { id: 10, title: "Human Resources Officer", company: "Equity Bank", location: "Nairobi, Kenya", type: "Full-time", salary: "KSh 90k - 130k", posted: "1 day ago", tags: ["HR", "Recruitment", "Training"], image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4fe3?w=400&h=300&fit=crop" },
 ];
 
 const companyAds = [
@@ -415,14 +415,35 @@ Date: ${new Date().toLocaleDateString()}
                   <span className="text-xl">✓</span>
                   <span>10,000+ Jobs Listed</span>
                 </div>
+</div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <section className="py-8 px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="text-yellow-500 text-lg font-bold">🎓 Scholarships Available</h4>
+            <section className="py-8 px-4 bg-neutral-800">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-blue-400 text-lg font-bold">🔥 Hot Jobs This Week</h4>
+                  <span className="text-neutral-500 text-sm">Updated: April 15, 2026</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {jobs.slice(0, 8).map((job) => (
+                    <div key={job.id} className="bg-neutral-700 rounded-lg overflow-hidden hover:bg-neutral-600 transition cursor-pointer">
+                      <img src={job.image} alt={job.title} className="w-full h-28 object-cover" />
+                      <div className="p-3">
+                        <p className="text-green-400 text-xs font-semibold">{job.company}</p>
+                        <h5 className="text-white font-semibold text-sm mb-1 truncate">{job.title}</h5>
+                        <p className="text-neutral-400 text-xs">{job.location}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="py-8 px-4">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-yellow-500 text-lg font-bold">🎓 Scholarships Available</h4>
                 <button onClick={() => setActiveTab("scholarships")} className="text-blue-400 hover:text-blue-300 text-sm">View All →</button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
