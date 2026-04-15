@@ -33,6 +33,15 @@ const companyAds = [
   { id: 4, company: "Kenya Power", title: "Powering Kenya's Future", description: "Be part of the energy revolution. Engineering jobs available!", cta: "Apply Now", color: "bg-yellow-700", phone: "+254 20 3201000" },
 ];
 
+const courses = [
+  { id: 1, name: "Certified Electrical Engineering", provider: "Kenya Power + TVETA", duration: "3 Years", level: "Diploma", certificate: "Government Certified", jobs: "150+", fee: "KSh 45,000/year", description: "Complete 3-year program in electrical engineering with practical training.", image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop" },
+  { id: 2, name: "Certified Nursing (KRN/KRCHN)", provider: "Ministry of Health + KMTC", duration: "3 Years", level: "Certificate", certificate: "Ministry Certified", jobs: "200+", fee: "KSh 38,000/year", description: "3-year nursing program recognized by Kenya Medical Training Colleges.", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
+  { id: 3, name: "Certified Hotel Management", provider: "Kenya Utalii College + HELB", duration: "2 Years", level: "Diploma", certificate: "TVETA Certified", jobs: "100+", fee: "KSh 35,000/year", description: "Hotel and hospitality management with internship placement.", image: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=400&h=300&fit=crop" },
+  { id: 4, name: "Certified Accounting", provider: "KISM + ICPAK", duration: "3 Years", level: "Diploma", certificate: "ICPAK Recognized", jobs: "250+", fee: "KSh 40,000/year", description: "Professional accounting with CPA Preparation.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop" },
+  { id: 5, name: "Certified ICT Technician", provider: "NITA + Cisco", duration: "3 Years", level: "Certificate", certificate: "Cisco Certified", jobs: "180+", fee: "KSh 50,000/year", description: "ICT technician program with Cisco certification.", image: "https://images.unsplash.com/photo-1519389950473-47ba027e1cd4?w=400&h=300&fit=crop" },
+  { id: 6, name: "Certified Early Childhood Education", provider: "TECDIA + KNEC", duration: "2 Years", level: "Certificate", certificate: "KNEC Certified", jobs: "120+", fee: "KSh 30,000/year", description: "Early childhood teacher training.", image: "https://images.unsplash.com/photo-1503454537193-1d5a80dd8ca1?w=400&h=300&fit=crop" },
+];
+
 const companyNews = [
   { id: 1, company: "Safaricom", title: "Safaricom Announces 500 New Jobs in 2026", description: "Kenya's leading telecom company plans to hire 500 new employees across various departments including IT, Customer Service, and Engineering.", date: "April 10, 2026", category: "Expansion", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop" },
   { id: 2, company: "Equity Bank", title: "Equity Bank Launches New Digital Banking Platform", description: "Equity Bank has unveiled a new mobile banking app, creating 50 new jobs in technology and customer support.", date: "April 8, 2026", category: "Innovation", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" },
@@ -68,7 +77,7 @@ const scholarships = [
 
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise">("jobs");
+  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise" | "courses">("jobs");
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [notifications, setNotifications] = useState<{id: number; message: string; type: "success" | "info" | "warning"}[]>([]);
   const [cvData, setCvData] = useState({
@@ -76,6 +85,7 @@ export default function Home() {
   });
   const [selectedScholarship, setSelectedScholarship] = useState<number | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<number | null>(null);
   const [currentJobSlide, setCurrentJobSlide] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => {
@@ -377,6 +387,7 @@ Date: ${new Date().toLocaleDateString()}
               <button onClick={() => setActiveTab("cvbuilder")} className={`${activeTab === "cvbuilder" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>CV Builder</button>
               <button onClick={() => setActiveTab("cv")} className={`${activeTab === "cv" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Export CV</button>
               <button onClick={() => setActiveTab("cvwriter")} className={`${activeTab === "cvwriter" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>CV Writer AI</button>
+              <button onClick={() => setActiveTab("courses")} className={`${activeTab === "courses" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Courses</button>
               <button onClick={() => setActiveTab("advertise")} className={`${activeTab === "advertise" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Advertise</button>
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Post a Job</button>
             </nav>
@@ -765,6 +776,48 @@ Applied via JobFind Kenya`;
         </div>
       )}
 
+      {selectedCourse && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80" onClick={() => setSelectedCourse(null)} />
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setSelectedCourse(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+            {(() => {
+              const course = courses.find(c => c.id === selectedCourse);
+              return (
+                <>
+                  <div className="h-40 overflow-hidden rounded-lg mb-4">
+                    <img src={course?.image} alt={course?.name} className="w-full h-full object-cover" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">{course?.name}</h3>
+                  <p className="text-green-400 font-semibold mb-4">{course?.provider}</p>
+                  
+                  <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                    <h4 className="text-white font-semibold mb-3">Course Details</h4>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Duration:</strong> {course?.duration}</p>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Level:</strong> {course?.level}</p>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Certificate:</strong> {course?.certificate}</p>
+                    <p className="text-neutral-300 text-sm mb-2"><strong>Fee:</strong> {course?.fee}</p>
+                    <p className="text-neutral-300 text-sm"><strong>Job Opportunities:</strong> {course?.jobs}</p>
+                  </div>
+                  
+                  <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                    <h4 className="text-white font-semibold mb-2">Description</h4>
+                    <p className="text-neutral-300 text-sm">{course?.description}</p>
+                  </div>
+                  
+                  <button onClick={() => {
+                    setNotifications([...notifications, { id: Date.now(), message: `📝 Course enrollment request for ${course?.name} submitted!`, type: "info" }]);
+                    setSelectedCourse(null);
+                  }} className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                    Enroll Now
+                  </button>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
       {activeTab === "companies" && (
         <section id="companies" className="py-12 px-4">
           <div className="max-w-6xl mx-auto">
@@ -1057,6 +1110,46 @@ Applied via JobFind Kenya`;
                   </div>
                 </div>
               </div>
+            </div>
+</div>
+          </section>
+        )}
+
+      {activeTab === "courses" && (
+        <section className="py-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-full">✅ Government Recognized</span>
+              <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">📜 Certificate</span>
+              <span className="bg-purple-600 text-white text-xs px-3 py-1 rounded-full">💼 Job Placement</span>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2 text-center">🎓 Skill Training Programs</h3>
+            <p className="text-neutral-400 mb-8 text-center">Learn a skill in 2-3 years and get a certificate from trusted partners</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {courses.map((course) => (
+                <div key={course.id} onClick={() => setSelectedCourse(course.id)} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-purple-500">
+                  <div className="h-40 overflow-hidden">
+                    <img src={course.image} alt={course.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-green-400 text-xs font-semibold">{course.provider}</span>
+                      <span className="text-neutral-500 text-xs">{course.duration}</span>
+                    </div>
+                    <h4 className="text-white font-semibold mb-2">{course.name}</h4>
+                    <p className="text-neutral-400 text-sm mb-2">{course.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">{course.certificate}</span>
+                      <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">{course.level}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-green-400 font-bold">{course.fee}</span>
+                      <span className="text-neutral-400 text-sm">{course.jobs} jobs</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
