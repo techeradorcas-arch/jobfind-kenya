@@ -537,7 +537,12 @@ Date: ${new Date().toLocaleDateString()}
       {activeTab === "scholarships" && (
         <section className="py-12 px-4">
           <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-full">✅ Government Verified</span>
+              <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">🎓 Direct Applications</span>
+            </div>
             <h3 className="text-2xl font-bold text-white mb-2 text-center">Scholarships for Students</h3>
+            <p className="text-neutral-400 mb-2 text-center">Browse and apply to scholarships completely FREE</p>
             <p className="text-neutral-400 mb-8 text-center">Find fully funded scholarships to study in Kenya and abroad</p>
 
             <div className="bg-neutral-800 rounded-xl p-6 mb-12">
@@ -623,7 +628,7 @@ Date: ${new Date().toLocaleDateString()}
                     <p className="text-neutral-300 text-sm">{scholarship?.description}</p>
                   </div>
                   
-                  <p className="text-yellow-400 text-sm text-center mb-4">Application Fee: KSh 100 via M-Pesa to +254 726 038 754</p>
+                  <p className="text-neutral-400 text-sm text-center mb-4">Note: Scholarship applications are FREE. KSh 100 optional for CV enhancement service.</p>
                   
                   <div className="flex flex-col gap-3">
                     {(() => {
@@ -636,7 +641,7 @@ Phone: ${cvData.phone}
 Scholarship: ${scholarship?.name}
 Provider: ${scholarship?.provider}
 
-REGISTRATION FEE: KSh 100 (to be paid via M-Pesa to +254 726 038 754)
+NOTE: This scholarship is FREE to apply. KSh 100 optional CV enhancement service available.
 
 SUMMARY
 ${cvData.summary}
