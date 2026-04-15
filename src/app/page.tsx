@@ -84,6 +84,7 @@ export default function Home() {
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
   const [selectedScholarship, setSelectedScholarship] = useState<number | null>(null);
+  const [scholarshipApplications, setScholarshipApplications] = useState(0);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<number | null>(null);
   const [currentJobSlide, setCurrentJobSlide] = useState(0);
@@ -692,7 +693,7 @@ Date: ${new Date().toLocaleDateString()}
                     <p className="text-neutral-300 text-sm">{scholarship?.description}</p>
                   </div>
                   
-                  <p className="text-neutral-400 text-sm text-center mb-4">Note: Scholarship applications are FREE. KSh 100 optional for CV enhancement service.</p>
+                  <p className="text-neutral-400 text-sm text-center mb-4">🎉 First 3 applications FREE! After that, KSh 100 registration fee (50% to JobFind Kenya, 50% to scholarship provider)</p>
                   
                   <div className="flex flex-col gap-3">
                     {(() => {
@@ -722,20 +723,35 @@ ${cvData.experience}
 Applied via JobFind Kenya`;
                       return (
                         <>
+                          {scholarshipApplications >= 3 && (
+                            <div className="bg-yellow-600 rounded-lg p-3 mb-4 text-center">
+                              <p className="text-white font-semibold">Registration Fee: KSh 100</p>
+                              <p className="text-white/80 text-xs">Split: 50% JobFind Kenya + 50% Scholarship Provider</p>
+                            </div>
+                          )}
                           <button onClick={() => {
+                            if (scholarshipApplications >= 3) {
+                              const confirmPay = confirm("Pay KSh 100 registration fee? KSh 50 goes to JobFind Kenya and KSh 50 to scholarship provider.");
+                              if (!confirmPay) return;
+                            }
                             navigator.clipboard.writeText(applicationText);
-                            alert("Application copied to clipboard! Paste it in an email to apply.");
-                            setNotifications([...notifications, { id: Date.now(), message: `📋 Scholarship application for ${scholarship?.name} ready to send!`, type: "info" }]);
+                            setScholarshipApplications(scholarshipApplications + 1);
+                            setNotifications([...notifications, { id: Date.now(), message: scholarshipApplications >= 3 ? `📋 Scholarship application (paid) for ${scholarship?.name} ready!` : `📋 Scholarship application for ${scholarship?.name} ready to send!`, type: "info" }]);
                           }} className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                            Copy Application
+                            {scholarshipApplications >= 3 ? "Copy Application (Paid)" : `Copy Application (${3 - scholarshipApplications} free left)`}
                           </button>
                           <button onClick={() => {
+                            if (scholarshipApplications >= 3) {
+                              const confirmPay = confirm("Pay KSh 100 registration fee? KSh 50 goes to JobFind Kenya and KSh 50 to scholarship provider.");
+                              if (!confirmPay) return;
+                            }
                             const subject = encodeURIComponent(`Scholarship Application: ${scholarship?.name}`);
                             const body = encodeURIComponent(applicationText);
                             window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
-                            setNotifications([...notifications, { id: Date.now(), message: `✅ Scholarship application sent to ${scholarship?.name}!`, type: "success" }]);
+                            setScholarshipApplications(scholarshipApplications + 1);
+                            setNotifications([...notifications, { id: Date.now(), message: scholarshipApplications >= 3 ? `✅ Scholarship application (paid) sent to ${scholarship?.name}!` : `✅ Scholarship application sent to ${scholarship?.name}!`, type: "success" }]);
                           }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                            Apply via Email
+                            {scholarshipApplications >= 3 ? "Apply via Email (Paid)" : `Apply via Email (${3 - scholarshipApplications} free left)`}
                           </button>
                         </>
                       );
