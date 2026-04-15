@@ -1042,6 +1042,7 @@ Phone: ${selectedCompanyData.phone}
       )}
 
       <div className="fixed right-0 top-1/2 -translate-y-1/2 bg-neutral-800 rounded-l-lg p-2 z-40 flex flex-col gap-2">
+        <span className="text-white text-xs text-center pb-2">Quick Access</span>
         <button onClick={() => setActiveTab("news")} className="bg-green-600 p-3 rounded-full hover:bg-green-700 transition" title="News">
           <span className="text-white">📰</span>
         </button>
