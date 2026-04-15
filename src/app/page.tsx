@@ -70,6 +70,7 @@ export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise">("jobs");
   const [showOnboarding, setShowOnboarding] = useState(true);
+  const [notifications, setNotifications] = useState<{id: number; message: string; type: "success" | "info" | "warning"}[]>([]);
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
@@ -300,6 +301,17 @@ Date: ${new Date().toLocaleDateString()}
 
   return (
     <main className="min-h-screen bg-neutral-900 pb-20">
+      {notifications.length > 0 && (
+        <div className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b border-neutral-700">
+          {notifications.map((notif) => (
+            <div key={notif.id} className={`px-4 py-2 flex items-center justify-between ${notif.type === "success" ? "bg-green-600" : notif.type === "warning" ? "bg-yellow-600" : "bg-blue-600"}`}>
+              <span className="text-white text-sm">{notif.message}</span>
+              <button onClick={() => setNotifications(notifications.filter(n => n.id !== notif.id))} className="text-white hover:text-neutral-200 text-xl">×</button>
+            </div>
+          ))}
+        </div>
+      )}
+
       {showOnboarding && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/80" />
@@ -682,6 +694,7 @@ Applied via JobFind Kenya`;
                           <button onClick={() => {
                             navigator.clipboard.writeText(applicationText);
                             alert("Application copied to clipboard! Paste it in an email to apply.");
+                            setNotifications([...notifications, { id: Date.now(), message: `📋 Scholarship application for ${scholarship?.name} ready to send!`, type: "info" }]);
                           }} className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                             Copy Application
                           </button>
@@ -689,6 +702,7 @@ Applied via JobFind Kenya`;
                             const subject = encodeURIComponent(`Scholarship Application: ${scholarship?.name}`);
                             const body = encodeURIComponent(applicationText);
                             window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+                            setNotifications([...notifications, { id: Date.now(), message: `✅ Scholarship application sent to ${scholarship?.name}!`, type: "success" }]);
                           }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                             Apply via Email
                           </button>
@@ -1128,6 +1142,7 @@ Phone: ${selectedCompanyData.phone}
                 a.download = `CV_${companyName.replace(/\s+/g, "_")}.txt`;
                 a.click();
                 URL.revokeObjectURL(url);
+                setNotifications([...notifications, { id: Date.now(), message: `✅ Application submitted to ${companyName}!`, type: "success" }]);
               }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                 Apply with your CV
               </button>
