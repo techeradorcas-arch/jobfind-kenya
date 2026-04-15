@@ -69,6 +69,7 @@ const scholarships = [
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise">("jobs");
+  const [showOnboarding, setShowOnboarding] = useState(true);
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
@@ -298,6 +299,45 @@ Date: ${new Date().toLocaleDateString()}
 
   return (
     <main className="min-h-screen bg-neutral-900 pb-20">
+      {showOnboarding && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80" />
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setShowOnboarding(false)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Welcome to JobFind Kenya!</h2>
+              <p className="text-neutral-400">Your trusted gateway to jobs and scholarships</p>
+            </div>
+            <div className="bg-neutral-700 rounded-lg overflow-hidden mb-6">
+              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop" alt="How to use JobFind Kenya" className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="text-white font-bold mb-2">📹 How to Use JobFind Kenya</h3>
+                <ul className="text-neutral-300 text-sm space-y-2">
+                  <li>✅ Browse verified job listings from trusted companies</li>
+                  <li>✅ Apply for scholarships to study in Kenya and abroad</li>
+                  <li>✅ Build and export your professional CV</li>
+                  <li>✅ Use AI Writer to improve your applications</li>
+                  <li>✅ Stay updated with latest job market news</li>
+                </ul>
+              </div>
+            </div>
+            <div className="bg-red-900/50 border border-red-700 rounded-lg p-4 mb-6">
+              <h3 className="text-red-400 font-bold mb-2">⚠️ How to Avoid Scams</h3>
+              <ul className="text-neutral-300 text-sm space-y-2">
+                <li>🚫 We NEVER ask for payment to apply for jobs</li>
+                <li>🚫 We NEVER ask for your M-Pesa pin</li>
+                <li>🚫 All employers are government verified</li>
+                <li>🚫 Legitimate scholarships are FREE to apply</li>
+                <li>🚫 Report suspicious activity to authorities</li>
+              </ul>
+            </div>
+            <button onClick={() => setShowOnboarding(false)} className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+              Get Started
+            </button>
+          </div>
+        </div>
+      )}
+
       <header className="sticky top-0 z-50 bg-neutral-900/95 backdrop-blur border-b border-neutral-800">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
