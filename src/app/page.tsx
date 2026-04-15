@@ -94,6 +94,22 @@ export default function Home() {
     }, 4000);
     return () => clearInterval(timer);
   }, []);
+
+  const [lastUpdated, setLastUpdated] = useState(new Date());
+  useEffect(() => {
+    const updateTimer = setInterval(() => {
+      setLastUpdated(new Date());
+    }, 60000);
+    return () => clearInterval(updateTimer);
+  }, []);
+
+  const [techNews, setTechNews] = useState([
+    { id: 1, title: "AI Revolution in Kenya: 2026 Tech Jobs Surge", source: "Tech Daily", time: "2 hrs ago" },
+    { id: 2, title: "Safaricom 5G Network Expansion Continues", source: "CCN", time: "4 hrs ago" },
+    { id: 3, title: "Kenya's First Tech City Launching in Konza", source: "Business Daily", time: "6 hrs ago" },
+    { id: 4, title: "Google Opens AI Hub in Nairobi", source: "Standard Media", time: "8 hrs ago" },
+    { id: 5, title: "Kenyatta University Tech Scholarships", source: "TV47", time: "10 hrs ago" },
+  ]);
   const [cvBuilderData, setCvBuilderData] = useState({
     fullName: "", email: "", phone: "", address: "", linkedin: "", portfolio: "",
     objective: "", skills: "", workHistory: "", education: "", certifications: "", languages: "", refs: ""
@@ -481,6 +497,27 @@ Date: ${new Date().toLocaleDateString()}
                     );
                   })()}
                 </div>
+              </div>
+            </section>
+
+            <section className="py-8 px-4 bg-neutral-800">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-purple-400 text-lg font-bold">📱 Tech & Career News</h4>
+                  <div className="text-green-400 text-sm">🔄 Auto-updating</div>
+                </div>
+                <div className="space-y-2">
+                  {techNews.map((news) => (
+                    <div key={news.id} className="bg-neutral-700 rounded-lg p-3 flex items-center justify-between hover:bg-neutral-600 transition cursor-pointer">
+                      <span className="text-white">{news.title}</span>
+                      <div className="text-right">
+                        <span className="text-neutral-400 text-sm block">{news.source}</span>
+                        <span className="text-neutral-500 text-xs">{news.time}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-neutral-500 text-xs text-center mt-4">Last updated: {lastUpdated.toLocaleTimeString()}</p>
               </div>
             </section>
 
