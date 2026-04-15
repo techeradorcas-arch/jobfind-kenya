@@ -912,7 +912,10 @@ Date: ${new Date().toLocaleDateString()}
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70" onClick={() => setSelectedCompany(null)} />
           <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <button onClick={() => setSelectedCompany(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+            <div className="flex items-center gap-3 absolute top-4 right-4">
+              <button onClick={() => setActiveTab("companies")} className="text-blue-400 hover:text-blue-300 text-sm">Our Partners</button>
+              <button onClick={() => setSelectedCompany(null)} className="text-neutral-400 hover:text-white text-xl">✕</button>
+            </div>
             <div className="h-40 overflow-hidden rounded-lg mb-4">
               <img src={selectedCompanyData.image} alt={selectedCompanyData.name} className="w-full h-full object-cover" />
             </div>
@@ -994,9 +997,6 @@ Phone: ${selectedCompanyData.phone}
         </div>
       </div>
 
-      <button onClick={() => setActiveTab("companies")} className="fixed bottom-[140px] left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 flex items-center justify-center cursor-pointer hover:bg-neutral-700 transition">
-        <span className="text-white text-sm">Our Partners</span>
-      </button>
-    </main>
+      </main>
   );
 }
