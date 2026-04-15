@@ -44,6 +44,15 @@ const companyNews = [
   { id: 8, company: "TechCorp Africa", title: "TechCorp Africa Launches AI Division", description: "New artificial intelligence research division in Mombasa seeking 50 machine learning engineers.", date: "March 20, 2026", category: "Innovation", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop" },
 ];
 
+const scholarshipVideos = [
+  { id: 1, name: "Amina Omar", scholarship: "Kenya Government Scholarship", university: "University of Nairobi", testimonial: "This scholarship changed my life. I'm now pursuing my dream of becoming a doctor.", video: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop", year: "2024" },
+  { id: 2, name: "John Mwangi", scholarship: "Commonwealth Scholarship", university: "University of Cambridge", testimonial: "From a small village in Kisumu to Cambridge - this scholarship made it possible.", video: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop", year: "2023" },
+  { id: 3, name: "Sarah Nekesa", scholarship: "USAID Scholarship", university: "MIT", testimonial: "The USAID scholarship gave me wings to fly. Now I'm working on AI research.", video: "https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=600&h=400&fit=crop", year: "2024" },
+  { id: 4, name: "Peter Otieno", scholarship: "EU Scholarship", university: "University of Amsterdam", testimonial: "Studying in Europe was my dream. Thanks to EU Scholarship, I'm here!", video: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=600&h=400&fit=crop", year: "2023" },
+  { id: 5, name: "Grace Atieno", scholarship: "Safaricom Foundation", university: "Kenyatta University", testimonial: "As a first-generation college student, this scholarship was my gateway.", video: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop", year: "2024" },
+  { id: 6, name: "David Kimani", scholarship: "China Government Scholarship", university: "Peking University", testimonial: "Learning Mandarin and studying at Peking University has been incredible.", video: "https://images.unsplash.com/photo-1580392278097-f4d7b0f3d9c6?w=600&h=400&fit=crop", year: "2023" },
+];
+
 const scholarships = [
   { id: 1, name: "Kenya Government Scholarship", provider: "Government of Kenya", location: "Kenya", level: "Undergraduate", amount: "KSh 500,000", deadline: "May 30, 2026", field: "All Fields", eligibility: "KCSE Grade B+ and above", description: "Full scholarship for Kenyan students pursuing undergraduate studies in local universities.", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
   { id: 2, name: "Commonwealth Scholarship", provider: "Commonwealth", location: "UK, Australia, Canada", level: "Masters/PhD", amount: "Full Tuition + Living", deadline: "June 15, 2026", field: "All Fields", eligibility: "First Class Honors", description: "Fully funded scholarship for students from Commonwealth countries to pursue postgraduate studies.", image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=300&fit=crop" },
@@ -490,6 +499,29 @@ Date: ${new Date().toLocaleDateString()}
           <div className="max-w-6xl mx-auto">
             <h3 className="text-2xl font-bold text-white mb-2 text-center">Scholarships for Students</h3>
             <p className="text-neutral-400 mb-8 text-center">Find fully funded scholarships to study in Kenya and abroad</p>
+
+            <div className="bg-neutral-800 rounded-xl p-6 mb-12">
+              <h4 className="text-xl font-bold text-white mb-4 text-center">🎓 Student Success Stories</h4>
+              <p className="text-neutral-400 mb-6 text-center">Watch how scholarship recipients achieved their dreams</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {scholarshipVideos.map((video) => (
+                  <div key={video.id} className="bg-neutral-700 rounded-lg overflow-hidden hover:bg-neutral-600 transition cursor-pointer">
+                    <div className="relative h-40">
+                      <img src={video.video} alt={video.name} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <span className="text-4xl">▶️</span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-white font-semibold">{video.name}</p>
+                      <p className="text-green-400 text-sm">{video.scholarship}</p>
+                      <p className="text-neutral-400 text-xs mb-2">{video.university} • {video.year}</p>
+                      <p className="text-neutral-300 text-sm italic">"{video.testimonial}"</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {scholarships.map((scholarship) => (
