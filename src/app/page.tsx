@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const companies = [
   { id: 1, name: "Safaricom", logo: "S", color: "bg-red-600", jobs: 45, phone: "+254 722 000000", requirements: "Degree in IT/Computer Science, 3+ years experience, Strong analytical skills, Communication skills", location: "Nairobi, Kenya", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop" },
@@ -76,6 +76,13 @@ export default function Home() {
   });
   const [selectedScholarship, setSelectedScholarship] = useState<number | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
+  const [currentJobSlide, setCurrentJobSlide] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentJobSlide((prev) => (prev + 1) % jobs.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
   const [cvBuilderData, setCvBuilderData] = useState({
     fullName: "", email: "", phone: "", address: "", linkedin: "", portfolio: "",
     objective: "", skills: "", workHistory: "", education: "", certifications: "", languages: "", refs: ""
@@ -435,19 +442,32 @@ Date: ${new Date().toLocaleDateString()}
               <div className="max-w-6xl mx-auto">
                 <div className="flex items-center justify-between mb-4">
                   <h4 className="text-blue-400 text-lg font-bold">🔥 Hot Jobs This Week</h4>
-                  <span className="text-neutral-500 text-sm">Updated: April 15, 2026</span>
+                  <div className="flex items-center gap-3">
+                    <button onClick={() => setCurrentJobSlide(currentJobSlide === 0 ? jobs.length - 1 : currentJobSlide - 1)} className="bg-neutral-700 hover:bg-neutral-600 p-2 rounded-full text-white">←</button>
+                    <span className="text-neutral-500 text-sm">{currentJobSlide + 1}/{jobs.length}</span>
+                    <button onClick={() => setCurrentJobSlide((currentJobSlide + 1) % jobs.length)} className="bg-neutral-700 hover:bg-neutral-600 p-2 rounded-full text-white">→</button>
+                  </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {jobs.slice(0, 8).map((job) => (
-                    <div key={job.id} className="bg-neutral-700 rounded-lg overflow-hidden hover:bg-neutral-600 transition cursor-pointer">
-                      <img src={job.image} alt={job.title} className="w-full h-28 object-cover" />
-                      <div className="p-3">
-                        <p className="text-green-400 text-xs font-semibold">{job.company}</p>
-                        <h5 className="text-white font-semibold text-sm mb-1 truncate">{job.title}</h5>
-                        <p className="text-neutral-400 text-xs">{job.location}</p>
+                <div className="flex justify-center">
+                  {(() => {
+                    const job = jobs[currentJobSlide];
+                    return (
+                      <div className="w-full max-w-2xl bg-neutral-700 rounded-xl overflow-hidden hover:bg-neutral-600 transition cursor-pointer">
+                        <img src={job.image} alt={job.title} className="w-full h-48 object-cover" />
+                        <div className="p-4">
+                          <p className="text-green-400 text-sm font-semibold">{job.company}</p>
+                          <h5 className="text-white font-bold text-xl mb-2">{job.title}</h5>
+                          <p className="text-neutral-400 mb-2">{job.location} · {job.type}</p>
+                          <p className="text-white font-semibold">{job.salary}</p>
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {job.tags.map((tag) => (
+                              <span key={tag} className="bg-neutral-600 text-neutral-300 px-3 py-1 rounded-full text-sm">{tag}</span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })()}
                 </div>
               </div>
             </section>
