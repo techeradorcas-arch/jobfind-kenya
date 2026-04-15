@@ -821,11 +821,14 @@ Applied via JobFind Kenya`;
                     <p className="text-neutral-300 text-sm">{course?.description}</p>
                   </div>
                   
+                  <p className="text-yellow-400 text-sm text-center mb-2">Registration: KSh 10</p>
                   <button onClick={() => {
-                    setNotifications([...notifications, { id: Date.now(), message: `📝 Course enrollment request for ${course?.name} submitted!`, type: "info" }]);
+                    const confirmPay = confirm("Pay KSh 10 registration fee for course enrollment?");
+                    if (!confirmPay) return;
+                    setNotifications([...notifications, { id: Date.now(), message: `✅ Enrollment for ${course?.name} confirmed! KSh 10 paid.`, type: "success" }]);
                     setSelectedCourse(null);
                   }} className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                    Enroll Now
+                    Enroll Now - KSh 10
                   </button>
                 </>
               );
