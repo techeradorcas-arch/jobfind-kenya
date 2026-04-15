@@ -328,7 +328,6 @@ Date: ${new Date().toLocaleDateString()}
                 <li>🚫 We NEVER ask for payment to apply for jobs</li>
                 <li>🚫 We NEVER ask for your M-Pesa pin</li>
                 <li>🚫 All employers are government verified</li>
-                <li>🚫 Legitimate scholarships are FREE to apply</li>
                 <li>🚫 Report suspicious activity to authorities</li>
               </ul>
             </div>
