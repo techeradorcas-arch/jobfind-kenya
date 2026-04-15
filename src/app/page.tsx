@@ -636,6 +636,8 @@ Phone: ${cvData.phone}
 Scholarship: ${scholarship?.name}
 Provider: ${scholarship?.provider}
 
+REGISTRATION FEE: KSh 100 (to be paid via M-Pesa to +254 726 038 754)
+
 SUMMARY
 ${cvData.summary}
 
