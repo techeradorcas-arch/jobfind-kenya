@@ -773,10 +773,12 @@ Applied via JobFind Kenya`;
               const video = scholarshipVideos.find(v => v.id === selectedVideo);
               return (
                 <div>
-                  <div className="bg-neutral-900 rounded-lg overflow-hidden mb-4">
-                    <img src={video?.video} alt={video?.name} className="w-full h-64 object-cover" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-green-600 rounded-full p-6 text-6xl">▶️</div>
+                  <div className="bg-neutral-900 rounded-lg overflow-hidden mb-4 relative">
+                    <div className="aspect-video bg-neutral-800 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="bg-green-600 rounded-full p-8 text-6xl mb-4 cursor-pointer hover:bg-green-700 transition">▶️</div>
+                        <p className="text-neutral-400 text-sm">Click to play video</p>
+                      </div>
                     </div>
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{video?.name}</h3>
