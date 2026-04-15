@@ -74,6 +74,7 @@ export default function Home() {
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
   const [selectedScholarship, setSelectedScholarship] = useState<number | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [cvBuilderData, setCvBuilderData] = useState({
     fullName: "", email: "", phone: "", address: "", linkedin: "", portfolio: "",
     objective: "", skills: "", workHistory: "", education: "", certifications: "", languages: "", refs: ""
@@ -545,7 +546,7 @@ Date: ${new Date().toLocaleDateString()}
               <p className="text-neutral-400 mb-6 text-center">Watch how scholarship recipients achieved their dreams</p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {scholarshipVideos.map((video) => (
-                  <div key={video.id} className="bg-neutral-700 rounded-lg overflow-hidden hover:bg-neutral-600 transition cursor-pointer">
+                  <div key={video.id} onClick={() => setSelectedVideo(video.id)} className="bg-neutral-700 rounded-lg overflow-hidden hover:bg-neutral-600 transition cursor-pointer">
                     <div className="relative h-40">
                       <img src={video.video} alt={video.name} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -669,6 +670,34 @@ Applied via JobFind Kenya`;
                     })()}
                   </div>
                 </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
+      {selectedVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80" onClick={() => setSelectedVideo(null)} />
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setSelectedVideo(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl z-10">✕</button>
+            {(() => {
+              const video = scholarshipVideos.find(v => v.id === selectedVideo);
+              return (
+                <div>
+                  <div className="bg-neutral-900 rounded-lg overflow-hidden mb-4">
+                    <img src={video?.video} alt={video?.name} className="w-full h-64 object-cover" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-green-600 rounded-full p-6 text-6xl">▶️</div>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">{video?.name}</h3>
+                  <p className="text-green-400 font-semibold mb-1">{video?.scholarship}</p>
+                  <p className="text-neutral-400 text-sm mb-4">{video?.university} • {video?.year}</p>
+                  <div className="bg-neutral-700 rounded-lg p-4">
+                    <p className="text-neutral-300 italic">"{video?.testimonial}"</p>
+                  </div>
+                </div>
               );
             })()}
           </div>
