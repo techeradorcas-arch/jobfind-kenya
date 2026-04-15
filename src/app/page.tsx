@@ -994,19 +994,9 @@ Phone: ${selectedCompanyData.phone}
         </div>
       </div>
 
-      <div className="fixed bottom-[140px] left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 overflow-x-auto">
-        <div className="max-w-6xl mx-auto flex items-center gap-6">
-          <span className="text-neutral-400 text-sm whitespace-nowrap">Our Partners:</span>
-          <div className="flex items-center gap-4">
-            {companies.map((company) => (
-              <button key={company.id} onClick={() => setSelectedCompany(company.id)} className="flex items-center gap-2 bg-neutral-700 rounded-full px-3 py-1 cursor-pointer hover:bg-neutral-600 transition">
-                <img src={company.image} alt={company.name} className="w-6 h-6 rounded-full object-cover" />
-                <span className="text-white text-sm whitespace-nowrap">{company.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      <button onClick={() => setActiveTab("companies")} className="fixed bottom-[140px] left-0 right-0 bg-neutral-800 border-t border-neutral-700 p-3 z-40 flex items-center justify-center cursor-pointer hover:bg-neutral-700 transition">
+        <span className="text-white text-sm">Our Partners</span>
+      </button>
     </main>
   );
 }
