@@ -554,12 +554,47 @@ Date: ${new Date().toLocaleDateString()}
                   <p className="text-yellow-400 text-sm text-center mb-4">Application Fee: KSh 100 via M-Pesa to +254 726 038 754</p>
                   
                   <div className="flex flex-col gap-3">
-                    <button className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                      Apply Now
-                    </button>
-                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                      Contact Provider
-                    </button>
+                    {(() => {
+                      const scholarship = scholarships.find(s => s.id === selectedScholarship);
+                      const applicationText = `SCHOLARSHIP APPLICATION
+Name: ${cvData.firstName} ${cvData.lastName}
+Email: ${cvData.email}
+Phone: ${cvData.phone}
+
+Scholarship: ${scholarship?.name}
+Provider: ${scholarship?.provider}
+
+SUMMARY
+${cvData.summary}
+
+EDUCATION
+${cvData.education}
+
+SKILLS
+${cvData.skills}
+
+EXPERIENCE
+${cvData.experience}
+
+Applied via JobFind Kenya`;
+                      return (
+                        <>
+                          <button onClick={() => {
+                            navigator.clipboard.writeText(applicationText);
+                            alert("Application copied to clipboard! Paste it in an email to apply.");
+                          }} className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                            Copy Application
+                          </button>
+                          <button onClick={() => {
+                            const subject = encodeURIComponent(`Scholarship Application: ${scholarship?.name}`);
+                            const body = encodeURIComponent(applicationText);
+                            window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+                          }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                            Apply via Email
+                          </button>
+                        </>
+                      );
+                    })()}
                   </div>
                 </>
               );
