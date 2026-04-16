@@ -825,7 +825,9 @@ Date: ${new Date().toLocaleDateString()}
                     <h4 className="text-white font-semibold mb-3">Your Details</h4>
                     <input type="text" placeholder="Your Full Name" className="w-full bg-neutral-800 border border-neutral-600 text-white px-4 py-2 rounded-lg mb-2 focus:outline-none focus:border-green-500" value={cvData.firstName} onChange={(e) => setCvData({...cvData, firstName: e.target.value})} />
                     <input type="email" placeholder="Your Email Address" className="w-full bg-neutral-800 border border-neutral-600 text-white px-4 py-2 rounded-lg mb-2 focus:outline-none focus:border-green-500" value={cvData.email} onChange={(e) => setCvData({...cvData, email: e.target.value})} />
-                    <input type="tel" placeholder="Your Phone Number" className="w-full bg-neutral-800 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-green-500" value={cvData.phone} onChange={(e) => setCvData({...cvData, phone: e.target.value})} />
+                    <input type="tel" placeholder="Your Phone Number" className="w-full bg-neutral-800 border border-neutral-600 text-white px-4 py-2 rounded-lg mb-2 focus:outline-none focus:border-green-500" value={cvData.phone} onChange={(e) => setCvData({...cvData, phone: e.target.value})} />
+                    <input type="text" placeholder="KCSE Grade (e.g., A, A-, B+)" className="w-full bg-neutral-800 border border-neutral-600 text-white px-4 py-2 rounded-lg mb-2 focus:outline-none focus:border-green-500" />
+                    <input type="text" placeholder="National ID Number" className="w-full bg-neutral-800 border border-neutral-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-green-500" />
                   </div>
 
                   <div className="flex flex-col gap-3">
