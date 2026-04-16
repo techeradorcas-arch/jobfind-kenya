@@ -116,7 +116,7 @@ export default function Home() {
   });
   const [selectedScholarship, setSelectedScholarship] = useState<number | null>(null);
   const [scholarshipApplications, setScholarshipApplications] = useState(0);
-  const [submittedScholarships, setSubmittedScholarships] = useState<{id: number; name: string; provider: string; time: string}[]>([]);
+  const [submittedScholarships, setSubmittedScholarships] = useState<{id: number; name: string; provider: string; time: string; status: string; nextStep: string | null}[]>([]);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<number | null>(null);
   const [currentJobSlide, setCurrentJobSlide] = useState(0);
@@ -154,23 +154,29 @@ export default function Home() {
   useEffect(() => {
     if (submittedScholarships.length > 0) {
       const responseTimer = setInterval(() => {
-        const pendingApp = submittedScholarships[Math.floor(Math.random() * submittedScholarships.length)];
-        if (pendingApp) {
-          const responses = [
-            "Your application has been received and is under review!",
-            "Great news! The scholarship provider is interested in your profile.",
-            "Your application has been shortlisted. Prepare for next steps.",
-            "The provider has viewed your application. Good luck!",
-            "Your application is being processed. You'll hear soon!"
+        const pendingAppIndex = Math.floor(Math.random() * submittedScholarships.length);
+        const pendingApp = submittedScholarships[pendingAppIndex];
+        if (pendingApp && !pendingApp.nextStep) {
+          const nextSteps = [
+            { status: "Shortlisted", nextStep: "Upload your KCSE results and national ID" },
+            { status: "Interview", nextStep: "Attend online interview on Zoom - check your email for link" },
+            { status: "Verified", nextStep: "Your documents have been verified. Await funding confirmation" },
+            { status: "Approved", nextStep: "Congratulations! Scholarship approved. Check email for enrollment letter" },
+            { status: "Under Review", nextStep: "Continue checking your email for updates" }
           ];
-          const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+          const randomStep = nextSteps[Math.floor(Math.random() * nextSteps.length)];
+          
+          setSubmittedScholarships(prev => prev.map((app, idx) => 
+            idx === pendingAppIndex ? { ...app, status: randomStep.status, nextStep: randomStep.nextStep } : app
+          ));
+          
           setNotifications(prev => [...prev, { 
             id: Date.now(), 
-            message: `📬 ${pendingApp.provider} responded: ${randomResponse}`, 
+            message: `📬 ${pendingApp.provider}: ${randomStep.status}! Next: ${randomStep.nextStep}`, 
             type: "success" 
           }]);
         }
-      }, 10000);
+      }, 12000);
       return () => clearInterval(responseTimer);
     }
   }, [submittedScholarships.length]);
@@ -879,7 +885,7 @@ Applied via JobFind Kenya`;
                               if (!confirmPay) return;
                             }
                             setScholarshipApplications(scholarshipApplications + 1);
-                            setSubmittedScholarships([...submittedScholarships, { id: scholarship?.id || 0, name: scholarship?.name || '', provider: scholarship?.provider || '', time: new Date().toLocaleTimeString() }]);
+                            setSubmittedScholarships([...submittedScholarships, { id: scholarship?.id || 0, name: scholarship?.name || '', provider: scholarship?.provider || '', time: new Date().toLocaleTimeString(), status: "Submitted", nextStep: null }]);
                             setNotifications([...notifications, { 
                               id: Date.now(), 
                               message: scholarshipApplications >= 3 
