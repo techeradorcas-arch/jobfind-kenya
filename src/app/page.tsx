@@ -109,8 +109,9 @@ export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise" | "courses">("jobs");
   const [showOnboarding, setShowOnboarding] = useState(true);
-  const [notifications, setNotifications] = useState<{id: number; message: string; type: "success" | "info" | "warning"}[]>([]);
+  const [notifications, setNotifications] = useState<{id: number; message: string; type: "success" | "info" | "warning"; action?: string; actionData?: any}[]>([]);
   const [cvViews, setCvViews] = useState<{company: string; time: string}[]>([]);
+  const [activeNotification, setActiveNotification] = useState<{id: number; provider: string; status: string; nextStep: string} | null>(null);
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
@@ -184,7 +185,8 @@ export default function Home() {
           setNotifications(prev => [...prev, { 
             id: Date.now(), 
             message: `📬 ${pendingApp.provider}: ${randomStep.status}! Next: ${randomStep.nextStep}`, 
-            type: randomStep.status === "Approved" ? "success" : "info" 
+            type: randomStep.status === "Approved" ? "success" : "info",
+            action: "nextStep"
           }]);
         }
       }, 12000);
@@ -425,13 +427,44 @@ Date: ${new Date().toLocaleDateString()}
   return (
     <main className="min-h-screen bg-neutral-900 pb-20">
       {notifications.length > 0 && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b border-neutral-700">
-          {notifications.map((notif) => (
+        <div className="fixed top-0 left-0 right-0 z-50 bg-neutral-800 border-b border-neutral-700 max-h-40 overflow-y-auto">
+          {notifications.slice(-3).map((notif) => (
             <div key={notif.id} className={`px-4 py-2 flex items-center justify-between ${notif.type === "success" ? "bg-green-600" : notif.type === "warning" ? "bg-yellow-600" : "bg-blue-600"}`}>
-              <span className="text-white text-sm">{notif.message}</span>
+              <span 
+                className={`text-white text-sm cursor-pointer hover:underline ${notif.action ? 'font-semibold' : ''}`}
+                onClick={() => {
+                  if (notif.action === 'nextStep') {
+                    const app = submittedScholarships.find(a => a.provider.includes(notif.message.split(':')[0].replace('📬', '').trim()));
+                    if (app) {
+                      setActiveNotification({ id: notif.id, provider: app.provider, status: app.status, nextStep: app.nextStep || '' });
+                    }
+                  }
+                }}
+              >
+                {notif.message}
+              </span>
               <button onClick={() => setNotifications(notifications.filter(n => n.id !== notif.id))} className="text-white hover:text-neutral-200 text-xl">×</button>
             </div>
           ))}
+        </div>
+      )}
+
+      {activeNotification && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80" onClick={() => setActiveNotification(null)} />
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-md w-full">
+            <button onClick={() => setActiveNotification(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+            <h3 className="text-xl font-bold text-white mb-4">📋 Application Status</h3>
+            <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+              <p className="text-green-400 font-semibold mb-2">{activeNotification.provider}</p>
+              <p className="text-white mb-2">Status: <span className="font-bold">{activeNotification.status}</span></p>
+              <p className="text-neutral-300 mb-4">Next Step:</p>
+              <p className="text-white bg-neutral-800 p-3 rounded-lg">{activeNotification.nextStep}</p>
+            </div>
+            <button onClick={() => setActiveNotification(null)} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition">
+              Done
+            </button>
+          </div>
         </div>
       )}
 
