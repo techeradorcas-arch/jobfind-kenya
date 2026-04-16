@@ -152,28 +152,39 @@ export default function Home() {
   }, [cvViews.length]);
 
   useEffect(() => {
-    if (submittedScholarships.length > 0) {
+    const activeApps = submittedScholarships.filter(app => app.status !== "Approved");
+    if (activeApps.length > 0) {
       const responseTimer = setInterval(() => {
-        const pendingAppIndex = Math.floor(Math.random() * submittedScholarships.length);
-        const pendingApp = submittedScholarships[pendingAppIndex];
-        if (pendingApp && !pendingApp.nextStep) {
-          const nextSteps = [
+        const activeApps = submittedScholarships.filter(app => app.status !== "Approved");
+        if (activeApps.length === 0) return;
+        
+        const pendingAppIndex = Math.floor(Math.random() * activeApps.length);
+        const pendingApp = activeApps[pendingAppIndex];
+        
+        if (pendingApp) {
+          const allSteps = [
             { status: "Shortlisted", nextStep: "Upload your KCSE results and national ID" },
             { status: "Interview", nextStep: "Attend online interview on Zoom - check your email for link" },
             { status: "Verified", nextStep: "Your documents have been verified. Await funding confirmation" },
             { status: "Approved", nextStep: "Congratulations! Scholarship approved. Check email for enrollment letter" },
             { status: "Under Review", nextStep: "Continue checking your email for updates" }
           ];
-          const randomStep = nextSteps[Math.floor(Math.random() * nextSteps.length)];
+          
+          const currentApp = submittedScholarships.find(app => app.id === pendingApp.id);
+          const currentStatusIndex = allSteps.findIndex(s => s.status === currentApp?.status);
+          const nextStatusIndex = Math.min(currentStatusIndex + 1, allSteps.length - 1);
+          const randomStep = allSteps[nextStatusIndex];
+          
+          const actualIndex = submittedScholarships.findIndex(app => app.id === pendingApp.id);
           
           setSubmittedScholarships(prev => prev.map((app, idx) => 
-            idx === pendingAppIndex ? { ...app, status: randomStep.status, nextStep: randomStep.nextStep } : app
+            idx === actualIndex ? { ...app, status: randomStep.status, nextStep: randomStep.nextStep } : app
           ));
           
           setNotifications(prev => [...prev, { 
             id: Date.now(), 
             message: `📬 ${pendingApp.provider}: ${randomStep.status}! Next: ${randomStep.nextStep}`, 
-            type: "success" 
+            type: randomStep.status === "Approved" ? "success" : "info" 
           }]);
         }
       }, 12000);
