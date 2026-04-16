@@ -844,6 +844,28 @@ Applied via JobFind Kenya`;
                           }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                             {scholarshipApplications >= 3 ? "Apply via Email (Paid KSh 50)" : `Apply via Email (${3 - scholarshipApplications} free left)`}
                           </button>
+                          <button onClick={() => {
+                            if (!cvData.email || !cvData.firstName) {
+                              alert("Please enter your name and email first!");
+                              return;
+                            }
+                            if (scholarshipApplications >= 3) {
+                              const confirmPay = confirm("Pay KSh 50 registration fee? KSh 25 goes to JobFind Kenya and KSh 25 to scholarship provider.");
+                              if (!confirmPay) return;
+                            }
+                            setScholarshipApplications(scholarshipApplications + 1);
+                            setNotifications([...notifications, { 
+                              id: Date.now(), 
+                              message: scholarshipApplications >= 3 
+                                ? `✅ Application sent directly to ${scholarship?.provider}! (Paid KSh 50)` 
+                                : `✅ Application sent directly to ${scholarship?.provider}!`, 
+                              type: "success" 
+                            }]);
+                            setSelectedScholarship(null);
+                            alert(`Application submitted to ${scholarship?.provider}!\n\nThey will contact you at: ${cvData.email}`);
+                          }} className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                            {scholarshipApplications >= 3 ? "Apply Direct (Paid KSh 50)" : `Apply Direct (${3 - scholarshipApplications} free left)`}
+                          </button>
                         </>
                       );
                     })()}
