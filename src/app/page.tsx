@@ -80,6 +80,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise" | "courses">("jobs");
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [notifications, setNotifications] = useState<{id: number; message: string; type: "success" | "info" | "warning"}[]>([]);
+  const [cvViews, setCvViews] = useState<{company: string; time: string}[]>([]);
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
@@ -102,6 +103,22 @@ export default function Home() {
     }, 60000);
     return () => clearInterval(updateTimer);
   }, []);
+
+  useEffect(() => {
+    if (cvViews.length > 0) {
+      const companyNames = ["Safaricom", "Equity Bank", "Kenya Airways", "Kenya Power", "Jumia Kenya", "Kenyatta University", "Nestle Kenya"];
+      const viewTimer = setInterval(() => {
+        const randomCompany = companyNames[Math.floor(Math.random() * companyNames.length)];
+        setCvViews(prev => [...prev, { company: randomCompany, time: "Just now" }]);
+        setNotifications(prev => [...prev, { 
+          id: Date.now(), 
+          message: `👁️ Your CV was viewed by ${randomCompany}!`, 
+          type: "info" 
+        }]);
+      }, 15000);
+      return () => clearInterval(viewTimer);
+    }
+  }, [cvViews.length]);
 
   const [techNews, setTechNews] = useState([
     { id: 1, title: "AI Revolution in Kenya: 2026 Tech Jobs Surge", source: "Tech Daily", time: "2 hrs ago" },
@@ -1313,6 +1330,7 @@ Phone: ${selectedCompanyData.phone}
                 a.download = `CV_${companyName.replace(/\s+/g, "_")}.txt`;
                 a.click();
                 URL.revokeObjectURL(url);
+                setCvViews([...cvViews, { company: companyName, time: "Just now" }]);
                 setNotifications([...notifications, { id: Date.now(), message: `✅ Application submitted to ${companyName}!`, type: "success" }]);
               }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                 Apply with your CV
