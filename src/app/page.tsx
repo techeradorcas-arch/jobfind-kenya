@@ -954,6 +954,14 @@ Applied via JobFind Kenya`;
                             navigator.clipboard.writeText(applicationText);
                             setScholarshipApplications(scholarshipApplications + 1);
                             setNotifications([...notifications, { id: Date.now(), message: scholarshipApplications >= 3 ? `📋 Scholarship application (paid KSh 50) for ${scholarship?.name} ready!` : `📋 Scholarship application for ${scholarship?.name} ready to send!`, type: "info" }]);
+                            setTimeout(() => {
+                              setNotifications(prev => [...prev, { 
+                                id: Date.now(), 
+                                message: `📬 ${scholarship?.provider} has received your application!`, 
+                                type: "success",
+                                action: "nextStep"
+                              }]);
+                            }, 5000);
                           }} className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                             {scholarshipApplications >= 3 ? "Copy Application (Paid)" : `Copy Application (${3 - scholarshipApplications} free left)`}
                           </button>
@@ -967,6 +975,14 @@ Applied via JobFind Kenya`;
                             window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
                             setScholarshipApplications(scholarshipApplications + 1);
                             setNotifications([...notifications, { id: Date.now(), message: scholarshipApplications >= 3 ? `✅ Scholarship application (paid KSh 50) sent to ${scholarship?.name}!` : `✅ Scholarship application sent to ${scholarship?.name}!`, type: "success" }]);
+                            setTimeout(() => {
+                              setNotifications(prev => [...prev, { 
+                                id: Date.now(), 
+                                message: `📬 ${scholarship?.provider} has received your application!`, 
+                                type: "success",
+                                action: "nextStep"
+                              }]);
+                            }, 5000);
                           }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                             {scholarshipApplications >= 3 ? "Apply via Email (Paid KSh 50)" : `Apply via Email (${3 - scholarshipApplications} free left)`}
                           </button>
@@ -990,6 +1006,14 @@ Applied via JobFind Kenya`;
                             }]);
                             setSelectedScholarship(null);
                             alert(`Application submitted to ${scholarship?.provider}!\n\nThey will contact you at: ${cvData.email}`);
+                            setTimeout(() => {
+                              setNotifications(prev => [...prev, { 
+                                id: Date.now(), 
+                                message: `📬 ${scholarship?.provider} has received your application!`, 
+                                type: "success",
+                                action: "nextStep"
+                              }]);
+                            }, 5000);
                           }} className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                             {scholarshipApplications >= 3 ? "Apply Direct (Paid KSh 50)" : `Apply Direct (${3 - scholarshipApplications} free left)`}
                           </button>
