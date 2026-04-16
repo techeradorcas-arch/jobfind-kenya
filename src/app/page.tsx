@@ -112,6 +112,9 @@ export default function Home() {
   const [notifications, setNotifications] = useState<{id: number; message: string; type: "success" | "info" | "warning"; action?: string; actionData?: any}[]>([]);
   const [cvViews, setCvViews] = useState<{company: string; time: string}[]>([]);
   const [activeNotification, setActiveNotification] = useState<{id: number; provider: string; status: string; nextStep: string} | null>(null);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [uploadDocType, setUploadDocType] = useState("");
+  const [uploadStatus, setUploadStatus] = useState<{provider: string; status: string; doc: string} | null>(null);
   const [cvData, setCvData] = useState({
     firstName: "", lastName: "", email: "", phone: "", jobTitle: "", summary: "", skills: "", experience: "", education: ""
   });
@@ -461,8 +464,54 @@ Date: ${new Date().toLocaleDateString()}
               <p className="text-neutral-300 mb-4">Next Step:</p>
               <p className="text-white bg-neutral-800 p-3 rounded-lg">{activeNotification.nextStep}</p>
             </div>
+            {activeNotification.nextStep && activeNotification.nextStep !== "Congratulations! Scholarship approved. Check email for enrollment letter" && (
+              <button 
+                onClick={() => {
+                  setUploadDocType(activeNotification.nextStep);
+                  setUploadStatus({ provider: activeNotification.provider, status: activeNotification.status, doc: activeNotification.nextStep });
+                  setShowUploadModal(true);
+                  setActiveNotification(null);
+                }} 
+                className="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition mb-2"
+              >
+                📤 Upload Required Documents
+              </button>
+            )}
             <button onClick={() => setActiveNotification(null)} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition">
               Done
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showUploadModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80" onClick={() => setShowUploadModal(false)} />
+          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-md w-full">
+            <button onClick={() => setShowUploadModal(false)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+            <h3 className="text-xl font-bold text-white mb-4">📤 Upload Documents</h3>
+            <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+              <p className="text-green-400 font-semibold mb-2">{uploadStatus?.provider}</p>
+              <p className="text-white text-sm mb-2">Required: {uploadStatus?.doc}</p>
+              <div className="border-2 border-dashed border-neutral-600 rounded-lg p-6 text-center mb-4">
+                <p className="text-neutral-400 mb-2">Click to upload or drag and drop</p>
+                <p className="text-neutral-500 text-xs">PDF, JPG, PNG (Max 5MB)</p>
+                <input type="file" className="hidden" />
+              </div>
+              <input type="text" placeholder="Document Number (e.g., ID No, Exam No)" className="w-full bg-neutral-800 border border-neutral-600 text-white px-4 py-2 rounded-lg mb-2 focus:outline-none focus:border-green-500" />
+            </div>
+            <button 
+              onClick={() => {
+                setShowUploadModal(false);
+                setNotifications(prev => [...prev, { 
+                  id: Date.now(), 
+                  message: `✅ Documents uploaded successfully for ${uploadStatus?.provider}!`, 
+                  type: "success" 
+                }]);
+              }} 
+              className="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition"
+            >
+              Submit Documents
             </button>
           </div>
         </div>
