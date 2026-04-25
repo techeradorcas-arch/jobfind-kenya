@@ -73,12 +73,12 @@ const courses = [
 ];
 
 const internationalExams = [
-  { id: 1, name: "NCLEX-RN (Nursing)", provider: "National Council of State Boards of Nursing", country: "USA", date: "April 20, 2026", fee: "$200", description: "National Council Licensure Examination for Registered Nurses - Required for nursing practice in USA", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
-  { id: 2, name: "IELTS Academic", provider: "British Council/IDP", country: "UK/AU/NZ/CA", date: "April 18, 2026", fee: "$250", description: "International English Language Testing System - Required for study/work in English-speaking countries", image: "https://images.unsplash.com/photo-1434030216203-7c6685af95ee?w=400&h=300&fit=crop" },
-  { id: 3, name: "TOEFL iBT", provider: "ETS", country: "USA", date: "April 22, 2026", fee: "$245", description: "Test of English as a Foreign Language - Required for admission to USA universities", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
-  { id: 4, name: "OSCE (Nursing)", provider: "Nursing and Midwifery Council", country: "UK", date: "April 25, 2026", fee: "£150", description: "Objective Structured Clinical Examination - Practical nursing assessment for UK registration", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
-  { id: 5, name: "PLAB 1", provider: "General Medical Council", country: "UK", date: "April 23, 2026", fee: "£255", description: "Professional and Linguistic Assessments Board - Part 1 for medical practice in UK", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
-  { id: 6, name: "USMLE Step 1", provider: "FSMB", country: "USA", date: "April 26, 2026", fee: "$645", description: "United States Medical Licensing Examination - Step 1 for medical licensure in USA", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
+  { id: 1, name: "NCLEX-RN (Nursing)", provider: "National Council of State Boards of Nursing", country: "USA", date: "April 20, 2026", fee: "FREE", description: "National Council Licensure Examination for Registered Nurses - Required for nursing practice in USA", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
+  { id: 2, name: "IELTS Academic", provider: "British Council/IDP", country: "UK/AU/NZ/CA", date: "April 18, 2026", fee: "FREE", description: "International English Language Testing System - Required for study/work in English-speaking countries", image: "https://images.unsplash.com/photo-1434030216203-7c6685af95ee?w=400&h=300&fit=crop" },
+  { id: 3, name: "TOEFL iBT", provider: "ETS", country: "USA", date: "April 22, 2026", fee: "FREE", description: "Test of English as a Foreign Language - Required for admission to USA universities", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
+  { id: 4, name: "OSCE (Nursing)", provider: "Nursing and Midwifery Council", country: "UK", date: "April 25, 2026", fee: "FREE", description: "Objective Structured Clinical Examination - Practical nursing assessment for UK registration", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
+  { id: 5, name: "PLAB 1", provider: "General Medical Council", country: "UK", date: "April 23, 2026", fee: "FREE", description: "Professional and Linguistic Assessments Board - Part 1 for medical practice in UK", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
+  { id: 6, name: "USMLE Step 1", provider: "FSMB", country: "USA", date: "April 26, 2026", fee: "FREE", description: "United States Medical Licensing Examination - Step 1 for medical licensure in USA", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
 ];
 
 const companyNews = [
@@ -148,7 +148,7 @@ export default function Home() {
     };
   }, []);
 
-  const [lastUpdated, setLastUpdated] = useState(new Date());
+const [lastUpdated, setLastUpdated] = useState(new Date());
   useEffect(() => {
     const updateTimer = setInterval(() => {
       setLastUpdated(new Date());
@@ -156,69 +156,59 @@ export default function Home() {
     return () => clearInterval(updateTimer);
   }, []);
 
+  // Auto-update international exams to show live updates
+  const [examUpdates, setExamUpdates] = useState(() => {
+    // Initialize with current exams
+    return [...internationalExams];
+  });
+  
   useEffect(() => {
-    if (cvViews.length > 0) {
-      const companyNames = ["Safaricom", "Equity Bank", "Kenya Airways", "Kenya Power", "Jumia Kenya", "Kenyatta University", "Nestle Kenya"];
-      const viewTimer = setInterval(() => {
-        const randomCompany = companyNames[Math.floor(Math.random() * companyNames.length)];
-        setCvViews(prev => [...prev, { company: randomCompany, time: "Just now" }]);
-        setNotifications(prev => [...prev, { 
-          id: Date.now(), 
-          message: `👁️ Your CV was viewed by ${randomCompany}!`, 
-          type: "info" 
-        }]);
-      }, 15000);
-      return () => clearInterval(viewTimer);
-    }
+    const examUpdateTimer = setInterval(() => {
+      // Simulate live updates by shifting dates and adding status updates
+      setExamUpdates(prevExams => {
+        const now = new Date();
+        return prevExams.map(exam => {
+          // Create a copy of the exam
+          const updatedExam = { ...exam };
+          
+          // Simulate date progression for ongoing exams
+          const examDate = new Date(exam.date);
+          const timeDiff = now.getTime() - examDate.getTime();
+          
+          // If exam date has passed, show it as "Completed" or update to next date
+          if (timeDiff > 0) {
+            // For simplicity, we'll just update the date to show it's recent
+            const newDate = new Date(now);
+            newDate.setDate(newDate.getDate() + Math.floor(Math.random() * 30)); // Random future date
+            updatedExam.date = newDate.toLocaleDateString('en-US', { 
+              month: 'short', 
+              day: 'numeric', 
+              year: 'numeric' 
+            });
+          }
+          
+          // Occasionally add status updates
+          if (Math.random() > 0.7) { // 30% chance of status update
+            const statusUpdates = [
+              "Registration open",
+              "Seats filling fast",
+              "Last week to register",
+              "New test centers added",
+              "Results release date announced"
+            ];
+            // We'll store status in description for simplicity
+            const currentDesc = exam.description;
+            const randomStatus = statusUpdates[Math.floor(Math.random() * statusUpdates.length)];
+            updatedExam.description = `${currentDesc} | Status: ${randomStatus}`;
+          }
+          
+          return updatedExam;
+        });
+      });
+    }, 30000); // Update every 30 seconds
     
-    // Cleanup job application interval when no CV views
-    if (cvViews.length === 0 && jobAppInterval) {
-      clearInterval(jobAppInterval);
-      setJobAppInterval(null);
-    }
-  }, [cvViews.length, jobAppInterval]);
-
-  useEffect(() => {
-    const activeApps = submittedScholarships.filter(app => app.status !== "Approved");
-    if (activeApps.length > 0) {
-      const responseTimer = setInterval(() => {
-        const activeApps = submittedScholarships.filter(app => app.status !== "Approved");
-        if (activeApps.length === 0) return;
-        
-        const pendingAppIndex = Math.floor(Math.random() * activeApps.length);
-        const pendingApp = activeApps[pendingAppIndex];
-        
-        if (pendingApp) {
-          const allSteps = [
-            { status: "Shortlisted", nextStep: "Upload your KCSE results and national ID" },
-            { status: "Interview", nextStep: "Attend online interview on Zoom - check your email for link" },
-            { status: "Verified", nextStep: "Your documents have been verified. Await funding confirmation" },
-            { status: "Approved", nextStep: "Congratulations! Scholarship approved. Check email for enrollment letter" },
-            { status: "Under Review", nextStep: "Continue checking your email for updates" }
-          ];
-          
-          const currentApp = submittedScholarships.find(app => app.id === pendingApp.id);
-          const currentStatusIndex = allSteps.findIndex(s => s.status === currentApp?.status);
-          const nextStatusIndex = Math.min(currentStatusIndex + 1, allSteps.length - 1);
-          const randomStep = allSteps[nextStatusIndex];
-          
-          const actualIndex = submittedScholarships.findIndex(app => app.id === pendingApp.id);
-          
-          setSubmittedScholarships(prev => prev.map((app, idx) => 
-            idx === actualIndex ? { ...app, status: randomStep.status, nextStep: randomStep.nextStep } : app
-          ));
-          
-          setNotifications(prev => [...prev, { 
-            id: Date.now(), 
-            message: `📬 ${pendingApp.provider}: ${randomStep.status}! Next: ${randomStep.nextStep}`, 
-            type: randomStep.status === "Approved" ? "success" : "info",
-            action: "nextStep"
-          }]);
-        }
-      }, 12000);
-      return () => clearInterval(responseTimer);
-    }
-  }, [submittedScholarships.length]);
+    return () => clearInterval(examUpdateTimer);
+  }, []);
 
   const [techNews, setTechNews] = useState([
     { id: 1, title: "AI Revolution in Kenya: 2026 Tech Jobs Surge", source: "Tech Daily", time: "2 hrs ago" },
@@ -1475,27 +1465,27 @@ Applied via JobFind Kenya`;
              <h3 className="text-2xl font-bold text-white mb-2 text-center">📋 International Exams & Certifications</h3>
              <p className="text-neutral-400 mb-8 text-center">Access latest exam schedules and prepare for global career opportunities</p>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               {internationalExams.map((exam) => (
-                 <div key={exam.id} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-purple-500">
-                   <div className="h-40 overflow-hidden">
-                     <img src={exam.image} alt={exam.name} className="w-full h-full object-cover" />
-                   </div>
-                   <div className="p-4">
-                     <div className="flex items-center justify-between mb-2">
-                       <span className="text-green-400 text-xs font-semibold">{exam.provider}</span>
-                       <span className="text-neutral-500 text-xs">{exam.date}</span>
-                     </div>
-                     <h4 className="text-white font-semibold mb-2">{exam.name}</h4>
-                     <p className="text-neutral-400 text-sm mb-2">{exam.description}</p>
-                     <div className="flex flex-wrap gap-2 mb-2">
-                       <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">{exam.country}</span>
-                       <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">Fee: {exam.fee}</span>
-                     </div>
-                   </div>
-                 </div>
-               ))}
-             </div>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {examUpdates.map((exam) => (
+                  <div key={exam.id} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-purple-500">
+                    <div className="h-40 overflow-hidden">
+                      <img src={exam.image} alt={exam.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-green-400 text-xs font-semibold">{exam.provider}</span>
+                        <span className="text-neutral-500 text-xs">{exam.date}</span>
+                      </div>
+                      <h4 className="text-white font-semibold mb-2">{exam.name}</h4>
+                      <p className="text-neutral-400 text-sm mb-2">{exam.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">{exam.country}</span>
+                        <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">Fee: {exam.fee}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
            </div>
          </section>
        )}
