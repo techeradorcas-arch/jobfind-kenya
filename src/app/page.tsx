@@ -72,6 +72,15 @@ const courses = [
   { id: 6, name: "Certified Early Childhood Education", provider: "TECDIA + KNEC", duration: "2 Years", level: "Certificate", certificate: "KNEC Certified", jobs: "120+", fee: "KSh 30,000/year", description: "Early childhood teacher training.", image: "https://images.unsplash.com/photo-1503454537193-1d5a80dd8ca1?w=400&h=300&fit=crop" },
 ];
 
+const internationalExams = [
+  { id: 1, name: "NCLEX-RN (Nursing)", provider: "National Council of State Boards of Nursing", country: "USA", date: "April 20, 2026", fee: "$200", description: "National Council Licensure Examination for Registered Nurses - Required for nursing practice in USA", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
+  { id: 2, name: "IELTS Academic", provider: "British Council/IDP", country: "UK/AU/NZ/CA", date: "April 18, 2026", fee: "$250", description: "International English Language Testing System - Required for study/work in English-speaking countries", image: "https://images.unsplash.com/photo-1434030216203-7c6685af95ee?w=400&h=300&fit=crop" },
+  { id: 3, name: "TOEFL iBT", provider: "ETS", country: "USA", date: "April 22, 2026", fee: "$245", description: "Test of English as a Foreign Language - Required for admission to USA universities", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
+  { id: 4, name: "OSCE (Nursing)", provider: "Nursing and Midwifery Council", country: "UK", date: "April 25, 2026", fee: "£150", description: "Objective Structured Clinical Examination - Practical nursing assessment for UK registration", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
+  { id: 5, name: "PLAB 1", provider: "General Medical Council", country: "UK", date: "April 23, 2026", fee: "£255", description: "Professional and Linguistic Assessments Board - Part 1 for medical practice in UK", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
+  { id: 6, name: "USMLE Step 1", provider: "FSMB", country: "USA", date: "April 26, 2026", fee: "$645", description: "United States Medical Licensing Examination - Step 1 for medical licensure in USA", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
+];
+
 const companyNews = [
   { id: 1, company: "Safaricom", title: "Safaricom Announces 500 New Jobs in 2026", description: "Kenya's leading telecom company plans to hire 500 new employees across various departments including IT, Customer Service, and Engineering.", date: "April 10, 2026", category: "Expansion", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop" },
   { id: 2, company: "Equity Bank", title: "Equity Bank Launches New Digital Banking Platform", description: "Equity Bank has unveiled a new mobile banking app, creating 50 new jobs in technology and customer support.", date: "April 8, 2026", category: "Innovation", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" },
@@ -107,7 +116,7 @@ const scholarships = [
 
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise" | "courses">("jobs");
+  const [activeTab, setActiveTab] = useState<"jobs" | "companies" | "cv" | "cvbuilder" | "cvwriter" | "news" | "scholarships" | "advertise" | "courses" | "exams">("jobs");
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [notifications, setNotifications] = useState<{id: number; message: string; type: "success" | "info" | "warning"; action?: string; actionData?: any}[]>([]);
   const [cvViews, setCvViews] = useState<{company: string; time: string}[]>([]);
