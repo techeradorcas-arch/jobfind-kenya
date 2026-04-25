@@ -73,12 +73,108 @@ const courses = [
 ];
 
 const internationalExams = [
-  { id: 1, name: "NCLEX-RN (Nursing)", provider: "National Council of State Boards of Nursing", country: "USA", date: "April 20, 2026", fee: "FREE", description: "National Council Licensure Examination for Registered Nurses - Required for nursing practice in USA", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
-  { id: 2, name: "IELTS Academic", provider: "British Council/IDP", country: "UK/AU/NZ/CA", date: "April 18, 2026", fee: "FREE", description: "International English Language Testing System - Required for study/work in English-speaking countries", image: "https://images.unsplash.com/photo-1434030216203-7c6685af95ee?w=400&h=300&fit=crop" },
-  { id: 3, name: "TOEFL iBT", provider: "ETS", country: "USA", date: "April 22, 2026", fee: "FREE", description: "Test of English as a Foreign Language - Required for admission to USA universities", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
-  { id: 4, name: "OSCE (Nursing)", provider: "Nursing and Midwifery Council", country: "UK", date: "April 25, 2026", fee: "FREE", description: "Objective Structured Clinical Examination - Practical nursing assessment for UK registration", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
-  { id: 5, name: "PLAB 1", provider: "General Medical Council", country: "UK", date: "April 23, 2026", fee: "FREE", description: "Professional and Linguistic Assessments Board - Part 1 for medical practice in UK", image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop" },
-  { id: 6, name: "USMLE Step 1", provider: "FSMB", country: "USA", date: "April 26, 2026", fee: "FREE", description: "United States Medical Licensing Examination - Step 1 for medical licensure in USA", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" },
+  {
+    id: 1,
+    name: "NCLEX-RN (Nursing)",
+    provider: "National Council of State Boards of Nursing",
+    country: "USA",
+    date: "April 20, 2026",
+    fee: "FREE",
+    description: "National Council Licensure Examination for Registered Nurses - Required for nursing practice in USA",
+    image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop",
+    pastPapers: [
+      "NCLEX-RN Practice Test 2026 - Medical Surgical Nursing",
+      "NCLEX-RN Practice Test 2026 - Pediatric Nursing",
+      "NCLEX-RN Practice Test 2026 - Mental Health Nursing",
+      "NCLEX-RN Practice Test 2026 - Maternal/Newborn Nursing",
+      "NCLEX-RN Practice Test 2026 - Pharmacology"
+    ]
+  },
+  {
+    id: 2,
+    name: "IELTS Academic",
+    provider: "British Council/IDP",
+    country: "UK/AU/NZ/CA",
+    date: "April 18, 2026",
+    fee: "FREE",
+    description: "International English Language Testing System - Required for study/work in English-speaking countries",
+    image: "https://images.unsplash.com/photo-1434030216203-7c6685af95ee?w=400&h=300&fit=crop",
+    pastPapers: [
+      "IELTS Academic Practice Test 2026 - Listening",
+      "IELTS Academic Practice Test 2026 - Reading",
+      "IELTS Academic Practice Test 2026 - Writing",
+      "IELTS Academic Practice Test 2026 - Speaking",
+      "IELTS Academic Sample Questions 2026"
+    ]
+  },
+  {
+    id: 3,
+    name: "TOEFL iBT",
+    provider: "ETS",
+    country: "USA",
+    date: "April 22, 2026",
+    fee: "FREE",
+    description: "Test of English as a Foreign Language - Required for admission to USA universities",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop",
+    pastPapers: [
+      "TOEFL iBT Practice Test 2026 - Reading Section",
+      "TOEFL iBT Practice Test 2026 - Listening Section",
+      "TOEFL iBT Practice Test 2026 - Speaking Section",
+      "TOEFL iBT Practice Test 2026 - Writing Section",
+      "TOEFL iBT Sample Questions 2026"
+    ]
+  },
+  {
+    id: 4,
+    name: "OSCE (Nursing)",
+    provider: "Nursing and Midwifery Council",
+    country: "UK",
+    date: "April 25, 2026",
+    fee: "FREE",
+    description: "Objective Structured Clinical Examination - Practical nursing assessment for UK registration",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
+    pastPapers: [
+      "OSCE Nursing Practice Scenarios 2026 - Clinical Skills",
+      "OSCE Nursing Practice Scenarios 2026 - Communication Skills",
+      "OSCE Nursing Practice Scenarios 2026 - Patient Safety",
+      "OSCE Nursing Practice Scenarios 2026 - Documentation",
+      "OSCE Nursing Sample Stations 2026"
+    ]
+  },
+  {
+    id: 5,
+    name: "PLAB 1",
+    provider: "General Medical Council",
+    country: "UK",
+    date: "April 23, 2026",
+    fee: "FREE",
+    description: "Professional and Linguistic Assessments Board - Part 1 for medical practice in UK",
+    image: "https://images.unsplash.com/photo-1576091160399-1128478a2d1e?w=400&h=300&fit=crop",
+    pastPapers: [
+      "PLAB 1 Practice Test 2026 - Multiple Choice Questions",
+      "PLAB 1 Practice Test 2026 - Extended Matching Questions",
+      "PLAB 1 Practice Test 2026 - Medicine Topics",
+      "PLAB 1 Practice Test 2026 - Surgery Topics",
+      "PLAB 1 Sample Paper 2026"
+    ]
+  },
+  {
+    id: 6,
+    name: "USMLE Step 1",
+    provider: "FSMB",
+    country: "USA",
+    date: "April 26, 2026",
+    fee: "FREE",
+    description: "United States Medical Licensing Examination - Step 1 for medical licensure in USA",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
+    pastPapers: [
+      "USMLE Step 1 Practice Test 2026 - Anatomy",
+      "USMLE Step 1 Practice Test 2026 - Physiology",
+      "USMLE Step 1 Practice Test 2026 - Biochemistry",
+      "USMLE Step 1 Practice Test 2026 - Pharmacology",
+      "USMLE Step 1 Sample Questions 2026"
+    ]
+  }
 ];
 
 const companyNews = [
@@ -132,6 +228,17 @@ export default function Home() {
   const [submittedScholarships, setSubmittedScholarships] = useState<{id: number; name: string; provider: string; time: string; status: string; nextStep: string | null}[]>([]);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<number | null>(null);
+  const [selectedExam, setSelectedExam] = useState<{ 
+    id: number; 
+    name: string; 
+    provider: string; 
+    country: string; 
+    date: string; 
+    fee: string; 
+    description: string; 
+    image: string;
+    pastPapers: string[]
+  } | null>(null);
   const [currentJobSlide, setCurrentJobSlide] = useState(0);
   const [jobAppInterval, setJobAppInterval] = useState<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
@@ -1072,50 +1179,101 @@ Applied via JobFind Kenya`;
         </div>
       )}
 
-      {selectedCourse && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/80" onClick={() => setSelectedCourse(null)} />
-          <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <button onClick={() => setSelectedCourse(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
-            {(() => {
-              const course = courses.find(c => c.id === selectedCourse);
-              return (
-                <>
-                  <div className="h-40 overflow-hidden rounded-lg mb-4">
-                    <img src={course?.image} alt={course?.name} className="w-full h-full object-cover" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{course?.name}</h3>
-                  <p className="text-green-400 font-semibold mb-4">{course?.provider}</p>
-                  
-                  <div className="bg-neutral-700 rounded-lg p-4 mb-4">
-                    <h4 className="text-white font-semibold mb-3">Course Details</h4>
-                    <p className="text-neutral-300 text-sm mb-2"><strong>Duration:</strong> {course?.duration}</p>
-                    <p className="text-neutral-300 text-sm mb-2"><strong>Level:</strong> {course?.level}</p>
-                    <p className="text-neutral-300 text-sm mb-2"><strong>Certificate:</strong> {course?.certificate}</p>
-                    <p className="text-neutral-300 text-sm mb-2"><strong>Fee:</strong> {course?.fee}</p>
-                    <p className="text-neutral-300 text-sm"><strong>Job Opportunities:</strong> {course?.jobs}</p>
-                  </div>
-                  
-                  <div className="bg-neutral-700 rounded-lg p-4 mb-4">
-                    <h4 className="text-white font-semibold mb-2">Description</h4>
-                    <p className="text-neutral-300 text-sm">{course?.description}</p>
-                  </div>
-                  
-                  <p className="text-yellow-400 text-sm text-center mb-2">Registration: KSh 10</p>
-                  <button onClick={() => {
-                    const confirmPay = confirm("Pay KSh 10 registration fee for course enrollment?");
-                    if (!confirmPay) return;
-                    setNotifications([...notifications, { id: Date.now(), message: `✅ Enrollment for ${course?.name} confirmed! KSh 10 paid.`, type: "success" }]);
-                    setSelectedCourse(null);
-                  }} className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition">
-                    Enroll Now - KSh 10
-                  </button>
-                </>
-              );
-            })()}
-          </div>
-        </div>
-      )}
+       {selectedCourse && (
+         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+           <div className="absolute inset-0 bg-black/80" onClick={() => setSelectedCourse(null)} />
+           <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+             <button onClick={() => setSelectedCourse(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+             {(() => {
+               const course = courses.find(c => c.id === selectedCourse);
+               return (
+                 <>
+                   <div className="h-40 overflow-hidden rounded-lg mb-4">
+                     <img src={course?.image} alt={course?.name} className="w-full h-full object-cover" />
+                   </div>
+                   <h3 className="text-2xl font-bold text-white mb-2">{course?.name}</h3>
+                   <p className="text-green-400 font-semibold mb-4">{course?.provider}</p>
+                   
+                   <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                     <h4 className="text-white font-semibold mb-3">Course Details</h4>
+                     <p className="text-neutral-300 text-sm mb-2"><strong>Duration:</strong> {course?.duration}</p>
+                     <p className="text-neutral-300 text-sm mb-2"><strong>Level:</strong> {course?.level}</p>
+                     <p className="text-neutral-300 text-sm mb-2"><strong>Certificate:</strong> {course?.certificate}</p>
+                     <p className="text-neutral-300 text-sm mb-2"><strong>Fee:</strong> {course?.fee}</p>
+                     <p className="text-neutral-300 text-sm"><strong>Job Opportunities:</strong> {course?.jobs}</p>
+                   </div>
+                   
+                   <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                     <h4 className="text-white font-semibold mb-2">Description</h4>
+                     <p className="text-neutral-300 text-sm">{course?.description}</p>
+                   </div>
+                   
+                   <p className="text-yellow-400 text-sm text-center mb-2">Registration: KSh 10</p>
+                   <button onClick={() => {
+                     const confirmPay = confirm("Pay KSh 10 registration fee for course enrollment?");
+                     if (!confirmPay) return;
+                     setNotifications([...notifications, { id: Date.now(), message: `✅ Enrollment for ${course?.name} confirmed! KSh 10 paid.`, type: "success" }]);
+                     setSelectedCourse(null);
+                   }} className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                     Enroll Now - KSh 10
+                   </button>
+                 </>
+               );
+             })()}
+           </div>
+         </div>
+       )}
+       
+       {selectedExam && (
+         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+           <div className="absolute inset-0 bg-black/80" onClick={() => setSelectedExam(null)} />
+           <div className="relative bg-neutral-800 rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+             <button onClick={() => setSelectedExam(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-white text-xl">✕</button>
+             {(() => {
+               const exam = internationalExams.find(e => e.id === selectedExam?.id);
+               return (
+                 <>
+                   <div className="h-40 overflow-hidden rounded-lg mb-4">
+                     <img src={exam?.image} alt={exam?.name} className="w-full h-full object-cover" />
+                   </div>
+                   <h3 className="text-2xl font-bold text-white mb-2">{exam?.name}</h3>
+                   <p className="text-green-400 font-semibold mb-4">{exam?.provider}</p>
+                   
+                   <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                     <h4 className="text-white font-semibold mb-3">Exam Details</h4>
+                     <p className="text-neutral-300 text-sm mb-2"><strong>Country:</strong> {exam?.country}</p>
+                     <p className="text-neutral-300 text-sm mb-2"><strong>Date:</strong> {exam?.date}</p>
+                     <p className="text-neutral-300 text-sm mb-2"><strong>Fee:</strong> {exam?.fee}</p>
+                     <p className="text-neutral-300 text-sm"><strong>Description:</strong> {exam?.description}</p>
+                   </div>
+                   
+                   <div className="bg-neutral-700 rounded-lg p-4 mb-4">
+                     <h4 className="text-white font-semibold mb-3">Past Papers</h4>
+                     {(exam?.pastPapers || []).length > 0 ? (
+                       <div className="space-y-2">
+                         {exam?.pastPapers.map((paper, index) => (
+                           <div key={index} className="bg-neutral-800 rounded-lg p-3 hover:bg-neutral-700 transition cursor-pointer">
+                             <p className="text-neutral-400">{paper}</p>
+                           </div>
+                         ))}
+                       </div>
+                     ) : (
+                       <p className="text-neutral-400 text-center">No past papers available</p>
+                     )}
+                   </div>
+                   
+                   <p className="text-yellow-400 text-sm text-center mb-4">All exams are FREE to take</p>
+                   <button onClick={() => {
+                     alert(`Registration for ${exam?.name} is open!\n\nVisit the official website of ${exam?.provider} to register for the exam on ${exam?.date}.`);
+                   }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+                     Register for Exam
+                   </button>
+                 </>
+               );
+             })()}
+           </div>
+         </div>
+       )}
 
       {activeTab === "companies" && (
         <section id="companies" className="py-12 px-4">
@@ -1466,29 +1624,29 @@ Applied via JobFind Kenya`;
              <p className="text-neutral-400 mb-8 text-center">Access latest exam schedules and prepare for global career opportunities</p>
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {examUpdates.map((exam) => (
-                  <div key={exam.id} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-purple-500">
-                    <div className="h-40 overflow-hidden">
-                      <img src={exam.image} alt={exam.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-green-400 text-xs font-semibold">{exam.provider}</span>
-                        <span className="text-neutral-500 text-xs">{exam.date}</span>
-                      </div>
-                      <h4 className="text-white font-semibold mb-2">{exam.name}</h4>
-                      <p className="text-neutral-400 text-sm mb-2">{exam.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">{exam.country}</span>
-                        <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">Fee: {exam.fee}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-           </div>
-         </section>
-       )}
+                 {examUpdates.map((exam) => (
+                   <div key={exam.id} onClick={() => setSelectedExam(exam)} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-purple-500">
+                     <div className="h-40 overflow-hidden">
+                       <img src={exam.image} alt={exam.name} className="w-full h-full object-cover" />
+                     </div>
+                     <div className="p-4">
+                       <div className="flex items-center justify-between mb-2">
+                         <span className="text-green-400 text-xs font-semibold">{exam.provider}</span>
+                         <span className="text-neutral-500 text-xs">{exam.date}</span>
+                       </div>
+                       <h4 className="text-white font-semibold mb-2">{exam.name}</h4>
+                       <p className="text-neutral-400 text-sm mb-2">{exam.description}</p>
+                       <div className="flex flex-wrap gap-2 mb-2">
+                         <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">{exam.country}</span>
+                         <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">Fee: {exam.fee}</span>
+                       </div>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+            </div>
+          </section>
+        )}
 
        {activeTab === "advertise" && (
         <section className="py-12 px-4">
