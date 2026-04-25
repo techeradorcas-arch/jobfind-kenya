@@ -599,6 +599,7 @@ Date: ${new Date().toLocaleDateString()}
               <button onClick={() => setActiveTab("cv")} className={`${activeTab === "cv" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Export CV</button>
               <button onClick={() => setActiveTab("cvwriter")} className={`${activeTab === "cvwriter" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>CV Writer AI</button>
               <button onClick={() => setActiveTab("courses")} className={`${activeTab === "courses" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Courses</button>
+              <button onClick={() => setActiveTab("exams")} className={`${activeTab === "exams" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Exams</button>
               <button onClick={() => setActiveTab("advertise")} className={`${activeTab === "advertise" ? "text-blue-500" : "text-neutral-300"} hover:text-white transition`}>Advertise</button>
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">Post a Job</button>
             </nav>
@@ -1459,11 +1460,47 @@ Applied via JobFind Kenya`;
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      )}
+           </div>
+         </section>
+       )}
 
-      {activeTab === "advertise" && (
+       {activeTab === "exams" && (
+         <section className="py-12 px-4">
+           <div className="max-w-6xl mx-auto">
+             <div className="flex items-center justify-center gap-3 mb-2">
+               <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-full">✅ International Recognition</span>
+               <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">📄 Certification</span>
+               <span className="bg-purple-600 text-white text-xs px-3 py-1 rounded-full">🌍 Global Opportunities</span>
+             </div>
+             <h3 className="text-2xl font-bold text-white mb-2 text-center">📋 International Exams & Certifications</h3>
+             <p className="text-neutral-400 mb-8 text-center">Access latest exam schedules and prepare for global career opportunities</p>
+
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               {internationalExams.map((exam) => (
+                 <div key={exam.id} className="bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-750 transition cursor-pointer border-2 border-transparent hover:border-purple-500">
+                   <div className="h-40 overflow-hidden">
+                     <img src={exam.image} alt={exam.name} className="w-full h-full object-cover" />
+                   </div>
+                   <div className="p-4">
+                     <div className="flex items-center justify-between mb-2">
+                       <span className="text-green-400 text-xs font-semibold">{exam.provider}</span>
+                       <span className="text-neutral-500 text-xs">{exam.date}</span>
+                     </div>
+                     <h4 className="text-white font-semibold mb-2">{exam.name}</h4>
+                     <p className="text-neutral-400 text-sm mb-2">{exam.description}</p>
+                     <div className="flex flex-wrap gap-2 mb-2">
+                       <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">{exam.country}</span>
+                       <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">Fee: {exam.fee}</span>
+                     </div>
+                   </div>
+                 </div>
+               ))}
+             </div>
+           </div>
+         </section>
+       )}
+
+       {activeTab === "advertise" && (
         <section className="py-12 px-4">
           <div className="max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-white mb-2 text-center">Advertise With Us</h3>
