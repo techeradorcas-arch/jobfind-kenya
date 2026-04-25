@@ -124,11 +124,19 @@ export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<number | null>(null);
   const [currentJobSlide, setCurrentJobSlide] = useState(0);
+  const [jobAppInterval, setJobAppInterval] = useState<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentJobSlide((prev) => (prev + 1) % jobs.length);
     }, 4000);
-    return () => clearInterval(timer);
+    
+    // Cleanup job application interval on unmount
+    return () => {
+      clearInterval(timer);
+      if (jobAppInterval) {
+        clearInterval(jobAppInterval);
+      }
+    };
   }, []);
 
   const [lastUpdated, setLastUpdated] = useState(new Date());
@@ -153,7 +161,13 @@ export default function Home() {
       }, 15000);
       return () => clearInterval(viewTimer);
     }
-  }, [cvViews.length]);
+    
+    // Cleanup job application interval when no CV views
+    if (cvViews.length === 0 && jobAppInterval) {
+      clearInterval(jobAppInterval);
+      setJobAppInterval(null);
+    }
+  }, [cvViews.length, jobAppInterval]);
 
   useEffect(() => {
     const activeApps = submittedScholarships.filter(app => app.status !== "Approved");
@@ -1542,6 +1556,35 @@ Phone: ${selectedCompanyData.phone}
                 URL.revokeObjectURL(url);
                 setCvViews([...cvViews, { company: companyName, time: "Just now" }]);
                 setNotifications([...notifications, { id: Date.now(), message: `✅ Application submitted to ${companyName}!`, type: "success" }]);
+                
+                // Clear any existing interval first
+                if (jobAppInterval) {
+                  clearInterval(jobAppInterval);
+                }
+                
+                // Set up periodic job application status notifications (every 5 seconds)
+                const jobStatusInterval = setInterval(() => {
+                  // Only show updates if there are pending applications
+                  if (cvViews.length > 0) {
+                    const companies = ["Safaricom", "Equity Bank", "Kenya Airways", "Kenya Power", "Jumia Kenya", "Kenyatta University", "Nestle Kenya", "Flutterwave Kenya", "China Road & Bridge", "Digital Africa"];
+                    const randomCompany = companies[Math.floor(Math.random() * companies.length)];
+                    const statusMessages = [
+                      "Your application has been received and is under review!",
+                      "The hiring team is reviewing your CV.",
+                      "Your application has been shortlisted for the next round.",
+                      "The interviewer has viewed your profile. Prepare for potential interview.",
+                      "Your application is still being processed. Check back soon!"
+                    ];
+                    const randomMessage = statusMessages[Math.floor(Math.random() * statusMessages.length)];
+                    
+                    setNotifications(prev => [...prev, { 
+                      id: Date.now(), 
+                      message: `💼 ${randomCompany}: ${randomMessage}`, 
+                      type: "info" 
+                    }]);
+                  }
+                }, 5000); // Every 5 seconds
+                setJobAppInterval(jobStatusInterval);
               }} className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition">
                 Apply with your CV
               </button>
